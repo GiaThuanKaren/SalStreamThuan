@@ -8,7 +8,9 @@ function Mainlayout({ children }: Props) {
   return (
     <>
       <Header />
-      {children}
+      <div className="flex items-center justify-center mx-[200px]">
+        {children}
+      </div>
     </>
   );
 }

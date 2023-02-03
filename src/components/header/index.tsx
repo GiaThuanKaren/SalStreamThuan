@@ -6,18 +6,19 @@ function Header() {
   const [isTop, setisTop] = React.useState(false);
   React.useEffect(() => {
     window.addEventListener("scroll", (e) => {
-      if(Math.abs(window.scrollY) == 0  ){
-        setisTop(true)
-      }else setisTop(false)
+      console.log(window.scrollY);
+      if (Math.abs(window.scrollY) == 0) {
+        setisTop(true);
+      } else setisTop(false);
     });
   }, []);
   return (
     <>
-      <div className="flex items-center justify-center mx-[200px]">
+      <div className="flex items-center justify-center mx-[200px] fixed top-0 left-0 right-0">
         <div
           className={`w-full min-h-[50px] ${
             isTop ? "" : "bg-black "
-          }flex items-center justify-between transition-all`}
+          }flex items-center justify-between transition-all  `}
         >
           <div className="flex items-center ">
             <Link href={""}>
@@ -39,7 +40,7 @@ function Header() {
           <div className="flex items-center justify-between">
             <SearchBar />
             <p className="text-white mx-2">Sign In</p>
-            <p className="text-white rounded-lg h-full w-max px-2 py-1 bg-blue-300">
+            <p className="text-white rounded-lg h-full w-max px-2 py-1 bg-blue-300 text-center">
               Register
             </p>
           </div>
