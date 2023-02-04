@@ -8,11 +8,11 @@ import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
 import { ICON } from "src/utils/Icon";
 import styles from "../styles/Home.module.css";
 interface Props {
-  slideData: [];
-  MovieTabData?: [];
-  TVTabData: [];
-  TvRecomment: [];
-  MoviePopular: [];
+  slideData: any;
+  MovieTabData?: any;
+  TVTabData: any;
+  TvRecomment: any;
+  MoviePopular: any;
 }
 export default function Home({
   slideData,
@@ -48,7 +48,7 @@ export default function Home({
   const SideBarTab = [
     {
       title: "Latest Movie",
-      data: MoviePopular["results"].slice(0, 4),
+      data: MoviePopular?.results.slice(0, 4),
     },
     {
       title: "Recomendation",
