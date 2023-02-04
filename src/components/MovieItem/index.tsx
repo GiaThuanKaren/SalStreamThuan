@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { MovieModel } from "src/Model";
 
-function MovieItem({ item }: { item?: MovieModel }) {
+function MovieItem({ item }: { item: MovieModel }) {
   return (
     <>
       <div className="basis-1/5 min-h-[250px]  px-5 py-1 my-3">
