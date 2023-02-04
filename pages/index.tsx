@@ -140,9 +140,7 @@ export default function Home({
                               alt="img"
                             />
                             <p className="px-2 py-1 text-white bg-[#007AFF] absolute bottom-0 right-0 mb-3 mr-2 text-xs rounded-xl font-medium">
-                              {new Date(item["release_date"])
-                                .getFullYear()
-                                .toString()}
+                              {item?.release_date}
                             </p>
                           </div>
                           <p className="text-xs text-white font-medium">
