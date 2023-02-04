@@ -14,7 +14,7 @@ function Header() {
   }, []);
   return (
     <>
-      <div className="flex items-center justify-center mx-[200px] fixed top-0 left-0 right-0">
+      <div className="flex items-center justify-center mx-[200px] z-[2] fixed top-0 left-0 right-0">
         <div
           className={`w-full min-h-[50px] ${
             isTop ? "" : "bg-black "
@@ -39,8 +39,8 @@ function Header() {
           </div>
           <div className="flex items-center justify-between">
             <SearchBar />
-            <p className="text-white mx-2">Sign In</p>
-            <p className="text-white rounded-lg h-full w-max px-2 py-1 bg-blue-300 text-center">
+            <p className="text-white mx-2 font-medium">Sign In</p>
+            <p className="text-white rounded-lg h-full w-max px-2 py-1 bg-[#007AFF] font-medium text-center">
               Register
             </p>
           </div>

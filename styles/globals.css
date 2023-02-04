@@ -12,7 +12,6 @@ body {
 a {
   color: white;
   text-decoration: none;
-
 }
 
 * {
@@ -25,6 +24,27 @@ a {
   }
   body {
     color: rgb(0, 0, 0);
-    background: rgb(255, 255, 255);
+    background: #080F28;
   }
+}
+.bg-slider {
+  background: rgb(50, 50, 64);
+  background: -moz-linear-gradient(
+    312deg,
+    rgba(50, 50, 64, 0.68531162464986) 0%,
+    rgba(82, 76, 76, 0.727328431372549) 100%
+  );
+  background: -webkit-linear-gradient(
+    312deg,
+    rgba(50, 50, 64, 0.68531162464986) 0%,
+    rgba(82, 76, 76, 0.727328431372549) 100%
+  );
+  background: linear-gradient(
+    312deg,
+    rgba(50, 50, 64, 0.68531162464986) 0%,
+    rgba(82, 76, 76, 0.727328431372549) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#323240",endColorstr="#524c4c",GradientType=1);
+  background-size: cover;
+  background-position: center;
 }

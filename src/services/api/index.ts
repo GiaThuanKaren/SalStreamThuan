@@ -9,6 +9,7 @@ const ImageOption = {
 export const GetTreningWeek = async function () {
   try {
     let { data } = await axios.get(`${Base_Url}/trending/movie/week?${ApiKey}`);
+    return data;
   } catch (e) {
     throw e;
   }
