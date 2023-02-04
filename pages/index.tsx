@@ -184,7 +184,7 @@ export default function Home({
                                     className="h-full "
                                     src={
                                       "https://image.tmdb.org/t/p/w300" +
-                                      item1.poster_path
+                                      item1?.poster_path
                                     }
                                     alt=""
                                   />
@@ -200,9 +200,7 @@ export default function Home({
                                     {item1.vote_average}/10
                                   </p>
                                   <p className="mx-2">
-                                    {new Date(item1["release_date"])
-                                      .getFullYear()
-                                      .toString()}
+                                    {item1?.release_date}
                                   </p>
                                   <p className="text-center px-2 py-1 bg-[#EDB709] text-black rounded-2xl text-xs font-medium">
                                     HD

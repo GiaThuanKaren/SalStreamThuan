@@ -64,9 +64,7 @@ function Slider({ slidedata = [] }: Props) {
                         {item["vote_average"]}/10
                       </p>
                       <p className="mx-3 text-[#6D7E96]">
-                        {new Date(item["release_date"])
-                          .getFullYear()
-                          .toString()}
+                        {item?.release_date}
                       </p>
                       <p className="text-center px-2 py-1 bg-[#EDB709] text-black rounded-2xl text-xs font-medium">
                         HD
