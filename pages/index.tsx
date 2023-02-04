@@ -1,10 +1,21 @@
 import Head from "next/head";
 import Image from "next/image";
 import React from "react";
-import { Slider } from "src/components";
+
+import { MovieItem, Slider, TVItem } from "src/components";
 import { Mainlayout } from "src/Layout";
-import { MovieModel } from "src/Model";
+import { MovieModel, TVModel } from "src/Model";
 import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+
+// import required modules
+import { Pagination } from "swiper";
+
 import { ICON } from "src/utils/Icon";
 import styles from "../styles/Home.module.css";
 interface Props {
@@ -42,7 +53,19 @@ export default function Home({
   const TabTv = [
     {
       title: "Latest",
-      href: "/movie/upcoming",
+      href: "/tv/airing_today",
+    },
+    {
+      title: "Most Viewed",
+      href: "/tv/popular",
+    },
+    {
+      title: "Most Rating",
+      href: "/tv/top_rated",
+    },
+    {
+      title: "Most Favortie",
+      href: "/tv/on_the_air",
     },
   ];
   const SideBarTab = [
@@ -64,7 +87,10 @@ export default function Home({
     ...TabMovie[0],
     data: MovieTabData["results"],
   });
-  const [selelectedTabTV, SetselectedTabTV] = React.useState("Latest");
+  const [selelectedTabTV, SetselectedTabTV] = React.useState({
+    ...TabTv[0],
+    data: TVTabData.results,
+  });
   const HandleListTabMovie = async function (item: any) {
     try {
       let result = await GetMoveOrTvByParam({ href: item.href });
@@ -80,11 +106,25 @@ export default function Home({
       throw e;
     }
   };
+
+  const HandleListTabTB = async function (item: any) {
+    try {
+      let result = await GetMoveOrTvByParam({ href: item.href });
+      console.log(result["results"], 123, "TV");
+      SetselectedTabTV({
+        ...selelectedTabTV,
+        data: result["results"],
+        title: item.title,
+      });
+    } catch (e) {
+      throw e;
+    }
+  };
   React.useEffect(() => {}, []);
   return (
     <>
       <Mainlayout>
-        <div className="h-[200vh] w-full">
+        <div className="min-h-[200vh] w-full">
           <Slider slidedata={slideData["results"]} />
           <div className="flex min-h-[100px] mt-7">
             <div className="basis-4/5 h-full">
@@ -127,27 +167,7 @@ export default function Home({
                 {selelectedTabMovie.data?.map((item: MovieModel) => {
                   return (
                     <>
-                      <div className="basis-1/5 min-h-[250px]  px-5 py-1 my-3">
-                        {/*  contend Movie */}
-                        <div className="h-full  w-full">
-                          <div className="relative">
-                            <img
-                              className="h-full object-contain"
-                              src={
-                                "https://image.tmdb.org/t/p/w300/" +
-                                item["poster_path"]
-                              }
-                              alt="img"
-                            />
-                            <p className="px-2 py-1 text-white bg-[#007AFF] absolute bottom-0 right-0 mb-3 mr-2 text-xs rounded-xl font-medium">
-                              {item?.release_date}
-                            </p>
-                          </div>
-                          <p className="text-xs text-white font-medium">
-                            {item["title"]}
-                          </p>
-                        </div>
-                      </div>
+                      <MovieItem item={item} />
                     </>
                   );
                 })}
@@ -160,6 +180,59 @@ export default function Home({
               </div>
 
               {/* Movie Tab End */}
+
+              {/* TV Tab Start */}
+
+              <div className="flex items-center justify-between my-10">
+                <p className="text-4xl font-bold text-white">TV Shows</p>
+                <div className="flex  items-center">
+                  {TabTv?.map((item: any, index: number) => {
+                    return (
+                      <>
+                        <div
+                          onClick={() => {
+                            HandleListTabTB(item);
+                          }}
+                          className={
+                            `${
+                              item.title == selelectedTabTV.title
+                                ? "border-[#EDB709] border-b-[4px]"
+                                : ""
+                            }` + " mx-3 hover:cursor-pointer "
+                          }
+                        >
+                          <p
+                            className={` text-lg ${
+                              item.title == selelectedTabTV.title
+                                ? "text-white font-medium "
+                                : "text-[#265D95] font-light"
+                            }   `}
+                          >
+                            {item?.title}
+                          </p>
+                        </div>
+                      </>
+                    );
+                  })}
+                </div>
+                <div className="min-w-[100px] text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-xl">
+                  <p className=" font-medium text-xs py-1 px-3 my-3 text-white">
+                    View All
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap">
+                {selelectedTabTV.data?.map((item: TVModel, index: number) => {
+                  return (
+                    <>
+                      <TVItem item={item} />
+                    </>
+                  );
+                })}
+              </div>
+
+              {/* TV Tab End */}
             </div>
 
             <div className="basis-1/5 px-2">
@@ -198,7 +271,12 @@ export default function Home({
                                     {item1.vote_average}/10
                                   </p>
                                   <p className="mx-2">
-                                    {item1?.release_date}
+                                    {item1?.release_date
+                                      ?.toString()
+                                      .substring(
+                                        0,
+                                        item1?.release_date.indexOf("-")
+                                      )}
                                   </p>
                                   <p className="text-center px-2 py-1 bg-[#EDB709] text-black rounded-2xl text-xs font-medium">
                                     HD

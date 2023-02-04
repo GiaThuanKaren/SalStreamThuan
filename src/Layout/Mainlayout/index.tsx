@@ -1,6 +1,6 @@
 import React from "react";
 import { JsxElement } from "typescript";
-import { Header } from "../../components";
+import { Footer, Header } from "../../components";
 interface Props {
   children?: any;
 }
@@ -11,6 +11,7 @@ function Mainlayout({ children }: Props) {
       <div className="flex items-center justify-center mx-[200px]">
         {children}
       </div>
+      <Footer />
     </>
   );
 }
