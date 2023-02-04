@@ -6,9 +6,27 @@ const ImageOption = {
   original: "https://image.tmdb.org/t/p/original",
 };
 
+export const GetMoveOrTvByParam = async function ({
+  title,
+  href,
+  page,
+}: {
+  title?: string;
+  href?: string;
+  page?: string;
+}) {
+  try {
+    let { data } = await axios.get(`${Base_Url}${href}?${ApiKey}`);
+    console.log(`${Base_Url}${href}?${ApiKey}`)
+    return data;
+  } catch (e) {}
+};
+
 export const GetTreningWeek = async function () {
   try {
     let { data } = await axios.get(`${Base_Url}/trending/movie/week?${ApiKey}`);
+    console.log(`${Base_Url}/trending/movie/week?${ApiKey}`);
+    console.log(123)
     return data;
   } catch (e) {
     throw e;
@@ -30,3 +48,5 @@ export const GetMovieTopRating = async function () {
     return data;
   } catch (e) {}
 };
+
+export const GetMovieNowPlaying = async function () {};
