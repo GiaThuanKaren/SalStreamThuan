@@ -2,7 +2,10 @@ import Link from "next/link";
 import React from "react";
 import { GetMoveOrTvByParam } from "src/services/api";
 import SearchBar from "../search";
-
+interface Genre {
+  name: string;
+  id: number;
+}
 function Header() {
   const [isTop, setisTop] = React.useState(false);
   const [genre, Setgenre] = React.useState([]);
@@ -38,7 +41,7 @@ function Header() {
             <Link href={"/movie"} className="hover:text-blue-400 mx-3">
               <p>Movies</p>
             </Link>
-            <Link href={"/series"} className="hover:text-blue-400 mx-3">
+            <Link href={"/tv"} className="hover:text-blue-400 mx-3">
               <p>TV Shows</p>
             </Link>
             <Link
@@ -58,30 +61,38 @@ function Header() {
                 {isOpengenre && (
                   <div className="shadow-lg text-white absolute top-full bg-[#1E2747] flex justify-between p-2">
                     <ul>
-                      {genre.slice(0, 10).map((item: any, index: number) => {
+                      {genre.slice(0, 10).map((item: Genre, index: number) => {
                         return (
-                          <li
+                          <Link
                             key={item.id}
-                            className="px-3 py-2  transition-all hover:text-[#075AB9] hover:bg-[rgb(21,27,50)]"
+                            href={`/genre/${item.name
+                              .toLowerCase()
+                              .replace(/\s/g, "")}/${item.id}`}
                           >
-                            <p className="whitespace-normal text-xs">
-                              {item.name}
-                            </p>
-                          </li>
+                            <li className="px-3 py-2  transition-all hover:text-[#075AB9] hover:bg-[rgb(21,27,50)]">
+                              <p className="whitespace-normal text-xs">
+                                {item.name}
+                              </p>
+                            </li>
+                          </Link>
                         );
                       })}
                     </ul>
                     <ul>
-                      {genre.slice(11).map((item: any, index: number) => {
+                      {genre.slice(11).map((item: Genre, index: number) => {
                         return (
-                          <li
+                          <Link
                             key={item.id}
-                            className="px-3 py-2 transition-all hover:text-[#075AB9] hover:bg-[rgb(21,27,50)]"
+                            href={`/genre/${item.name
+                              .toLowerCase()
+                              .replace(/\s/g, "")}/${item.id}`}
                           >
-                            <p className="whitespace-normal text-xs">
-                              {item.name}
-                            </p>
-                          </li>
+                            <li className="px-3 py-2 transition-all hover:text-[#075AB9] hover:bg-[rgb(21,27,50)]">
+                              <p className="whitespace-normal text-xs">
+                                {item.name}
+                              </p>
+                            </li>
+                          </Link>
                         );
                       })}
                     </ul>

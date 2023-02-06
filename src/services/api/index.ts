@@ -16,8 +16,10 @@ export const GetMoveOrTvByParam = async function ({
   page?: string;
 }) {
   try {
-    let { data } = await axios.get(`${Base_Url}${href}?${ApiKey}`);
-    console.log(`${Base_Url}${href}?${ApiKey}`)
+    let { data } = await axios.get(
+      `${Base_Url}${href}?${ApiKey}&page=${page ? page : "1"}`
+    );
+    console.log(`${Base_Url}${href}?${ApiKey}&page=${page ? page : "1"}`);
     return data;
   } catch (e) {}
 };
@@ -26,7 +28,7 @@ export const GetTreningWeek = async function () {
   try {
     let { data } = await axios.get(`${Base_Url}/trending/movie/week?${ApiKey}`);
     console.log(`${Base_Url}/trending/movie/week?${ApiKey}`);
-    console.log(123)
+    console.log(123);
     return data;
   } catch (e) {
     throw e;
@@ -50,3 +52,14 @@ export const GetMovieTopRating = async function () {
 };
 
 export const GetMovieNowPlaying = async function () {};
+
+export const GetListByIdGenre = async function (idGenre: number) {
+  try {
+    let { data } = await axios.get(
+      `${Base_Url}/discover/movie?${ApiKey}&with_genres=${idGenre}`
+    );
+    return data;
+  } catch (e) {
+    throw e;
+  }
+};
