@@ -53,7 +53,7 @@ export const GetMovieTopRating = async function () {
 
 export const GetMovieNowPlaying = async function () {};
 
-export const GetListByIdGenre = async function (idGenre: number) {
+export const GetListByIdGenre = async function (idGenre: string) {
   try {
     let { data } = await axios.get(
       `${Base_Url}/discover/movie?${ApiKey}&with_genres=${idGenre}`

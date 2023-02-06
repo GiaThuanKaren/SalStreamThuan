@@ -24,7 +24,7 @@ export const getStaticPaths: GetStaticPaths = async function () {
 
 export const getStaticProps: GetStaticProps = async function (context) {
   console.log(context.params, "Param");
-  let ListData = await GetListByIdGenre(context?.params?.idgenre);
+  let ListData = await GetListByIdGenre(context?.params?.idgenre as string );
 
   return {
     props: {
