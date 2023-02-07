@@ -19,6 +19,7 @@ import { Pagination } from "swiper";
 import { ICON } from "src/utils/Icon";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
+import { TabMovie, TabTv } from "src/utils";
 interface Props {
   slideData: any;
   MovieTabData?: any;
@@ -33,42 +34,6 @@ export default function Home({
   TvRecomment,
   MoviePopular,
 }: Props) {
-  const TabMovie = [
-    {
-      title: "Latest",
-      href: "/movie/upcoming",
-    },
-    {
-      title: "Most Viewed",
-      href: "/movie/popular",
-    },
-    {
-      title: "Most Rating",
-      href: "/movie/top_rated",
-    },
-    {
-      title: "Most Favortie",
-      href: "/movie/now_playing",
-    },
-  ];
-  const TabTv = [
-    {
-      title: "Latest",
-      href: "/tv/airing_today",
-    },
-    {
-      title: "Most Viewed",
-      href: "/tv/popular",
-    },
-    {
-      title: "Most Rating",
-      href: "/tv/top_rated",
-    },
-    {
-      title: "Most Favortie",
-      href: "/tv/on_the_air",
-    },
-  ];
   const SideBarTab = [
     {
       title: "Latest Movie",
@@ -221,7 +186,7 @@ export default function Home({
                   );
                 })}
               </div>
-              <Link href={`${selelectedTabTV.href}`} className="block">
+              <Link href={`${selelectedTabTV.href}/1`} className="block">
                 <div className="min-w-[100px] text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-xl">
                   <p className=" font-medium text-xs py-1 px-3 my-3 text-white">
                     View All

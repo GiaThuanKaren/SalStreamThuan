@@ -3,7 +3,9 @@ import React from "react";
 import { MovieItem, WrapperGrid } from "src/components";
 import { LayoutBasic, Mainlayout } from "src/Layout";
 import { MovieModel } from "src/Model";
+import { TabMovie, TabTv } from "src/utils";
 import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
+import { GetServerSideProps } from "next";
 interface Props {
   slideData: any;
   MovieTabData?: any;
@@ -18,24 +20,6 @@ function MoviePage({
   TvRecomment,
   MoviePopular,
 }: Props) {
-  const TabMovie = [
-    {
-      title: "Latest",
-      href: "/movie/upcoming",
-    },
-    {
-      title: "Most Viewed",
-      href: "/movie/popular",
-    },
-    {
-      title: "Most Rating",
-      href: "/movie/top_rated",
-    },
-    {
-      title: "Most Favortie",
-      href: "/movie/now_playing",
-    },
-  ];
   const SideBarTab = [
     {
       title: "Latest Movie",
@@ -122,7 +106,7 @@ function MoviePage({
           </div>
 
           <div className="text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-3xl">
-            <Link href={`${selelectedTabMovie.href}`}>
+            <Link href={`${selelectedTabMovie.href}/1`}>
               <p className="font-medium text-lg py-3 my-3 text-white">
                 View All
               </p>
@@ -135,7 +119,11 @@ function MoviePage({
 }
 
 export default MoviePage;
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async function ({
+  query,
+}) {
+  const { slug } = query;
+  console.log(query, "QUERY");
   let slideData = await GetTreningWeek();
   let MovieTabData = await GetMoveOrTvByParam({ href: "/movie/upcoming" });
   let MoviePopular = await GetMoveOrTvByParam({ href: "/movie/popular" });
@@ -150,4 +138,4 @@ export async function getServerSideProps() {
       MoviePopular,
     },
   };
-}
+};

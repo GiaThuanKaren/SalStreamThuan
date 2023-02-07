@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { memo } from "react";
 import { TVModel } from "src/Model";
+import Image from "../Image";
 function TVItem({ item }: { item: TVModel }) {
   return (
     <>
@@ -14,6 +15,7 @@ function TVItem({ item }: { item: TVModel }) {
                 src={"https://image.tmdb.org/t/p/w300/" + item["poster_path"]}
                 alt="img"
               />
+
               <p className="px-2 py-1 text-white bg-[#007AFF] absolute bottom-0 right-0 mb-3 mr-2 text-xs rounded-xl font-medium">
                 {item?.first_air_date
                   ?.toString()

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { memo } from "react";
 import { MovieModel } from "src/Model";
+import Image from "../Image";
 
 function MovieItem({ item }: { item: MovieModel }) {
   return (
@@ -29,4 +30,4 @@ function MovieItem({ item }: { item: MovieModel }) {
   );
 }
 
-export default memo(MovieItem);
+export default MovieItem;

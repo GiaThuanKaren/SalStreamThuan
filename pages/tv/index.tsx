@@ -4,6 +4,7 @@ import { TVItem, WrapperGrid } from "src/components";
 import { LayoutBasic, Mainlayout } from "src/Layout";
 import { MovieModel, TVModel } from "src/Model";
 import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
+import { TabMovie, TabTv } from "src/utils";
 interface Props {
   slideData: any;
   MovieTabData?: any;
@@ -18,24 +19,6 @@ function SeriesPage({
   TvRecomment,
   MoviePopular,
 }: Props) {
-  const TabTv = [
-    {
-      title: "Latest",
-      href: "/tv/airing_today",
-    },
-    {
-      title: "Most Viewed",
-      href: "/tv/popular",
-    },
-    {
-      title: "Most Rating",
-      href: "/tv/top_rated",
-    },
-    {
-      title: "Most Favortie",
-      href: "/tv/on_the_air",
-    },
-  ];
   const SideBarTab = [
     {
       title: "Latest Movie",
@@ -107,7 +90,7 @@ function SeriesPage({
             })}
           </div>
           <div className="min-w-[100px] text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-xl">
-            <Link href={`${selelectedTabTV.href}`} className="block text-white">
+            <Link href={`${selelectedTabTV.href}/1`} className="block text-white">
               <p className=" font-medium text-xs py-1 px-3 my-3 text-white">
                 View All
               </p>

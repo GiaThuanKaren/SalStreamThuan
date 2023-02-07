@@ -1,15 +1,18 @@
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 interface Props {
   totalPages: number;
   currentPage: number;
+  href: string;
 }
 
-const Pagination: React.FC<Props> = ({ totalPages, currentPage }) => {
+const Pagination: React.FC<Props> = ({ totalPages, currentPage, href }) => {
   const [selectedPage, setSelectedPage] = useState(currentPage);
-
+  const { push } = useRouter();
   const handlePageChange = (page: number) => {
     setSelectedPage(page);
+    push(`${href}/${page}`);
   };
 
   return (
@@ -26,6 +29,7 @@ const Pagination: React.FC<Props> = ({ totalPages, currentPage }) => {
       <div className="text-center text-white">
         {selectedPage} / {totalPages}
       </div>
+
       <button
         className={`w-12 h-12 p-2 rounded-full border border-gray-300 ${
           selectedPage === totalPages ? "cursor-not-allowed" : "cursor-pointer"

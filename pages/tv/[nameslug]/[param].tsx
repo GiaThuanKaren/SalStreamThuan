@@ -1,9 +1,9 @@
 import React from "react";
 import { LayoutBasic, Mainlayout } from "src/Layout";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
-import { MovieItem, Pagination, WrapperGrid } from "src/components";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { MovieItem, Pagination, TVItem, WrapperGrid } from "src/components";
 import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
-import { MovieModel } from "src/Model";
+import { MovieModel, TVModel } from "src/Model";
 interface Props {
   slideData: any;
   MovieTabData?: any;
@@ -22,11 +22,10 @@ function SlugMoviePage({
   currentPage,
   slug,
 }: Props) {
-  console.log(data);
+  console.log(slug, currentPage);
   const [currentPageState, SetcurrentpageState] = React.useState<number>(
     parseInt(currentPage)
   );
-
   return (
     <>
       <LayoutBasic>
@@ -36,10 +35,10 @@ function SlugMoviePage({
           MovieTabData={MovieTabData}
         >
           <div className="flex flex-wrap">
-            {data.data?.map((item: MovieModel, index: number) => {
+            {data.data?.map((item: TVModel, index: number) => {
               return (
                 <>
-                  <MovieItem item={item} key={index} />
+                  <TVItem item={item} key={index} />
                 </>
               );
             })}
@@ -58,34 +57,28 @@ function SlugMoviePage({
 
 export default SlugMoviePage;
 
-// export const getStaticPaths: GetStaticPaths = async function () {
-//   return {
-//     paths: [],
-//     fallback: "blocking",
-//   };
-// };
+export const getStaticPaths: GetStaticPaths = async function () {
+  return {
+    paths: [],
+    fallback: "blocking",
+  };
+};
 
-// export const getStaticProps: GetStaticProps = async function (context) {};
-
-export const getServerSideProps: GetServerSideProps = async function ({
-  query,
-}) {
-  const { nameslug, param } = query;
-  console.log("QUERY 1", nameslug, param);
-
-  let numpage = param as string;
-  let NameSlug = nameslug;
+export const getStaticProps: GetStaticProps = async function (context) {
+  console.log(context.params?.param, "123");
+  let numpage = context.params?.param as string;
+  let NameSlug = context.params?.nameslug;
 
   let result = await GetMoveOrTvByParam({
-    href: `/movie/${NameSlug}`,
+    href: `/tv/${NameSlug}`,
     page: numpage,
   });
   let slideData = await GetTreningWeek();
   let MovieTabData = await GetMoveOrTvByParam({ href: "/movie/upcoming" });
   let MoviePopular = await GetMoveOrTvByParam({ href: "/movie/popular" });
+
   return {
     props: {
-      result,
       data: {
         data: result.results,
         totalPage: result.total_pages as number,
@@ -94,7 +87,7 @@ export const getServerSideProps: GetServerSideProps = async function ({
       MovieTabData,
       MoviePopular,
       currentPage: numpage,
-      slug: `/movie/${NameSlug}`,
+      slug: `/tv/${NameSlug}`,
     },
   };
 };
