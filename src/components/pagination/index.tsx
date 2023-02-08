@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 interface Props {
-  totalPages: number;
-  currentPage: number;
+  totalPages?: number;
+  currentPage?: number;
   href: string;
 }
 
@@ -12,7 +12,7 @@ const Pagination: React.FC<Props> = ({ totalPages, currentPage, href }) => {
   const { push } = useRouter();
   const handlePageChange = (page: number) => {
     setSelectedPage(page);
-    push(`${href}/${page}`);
+    push(`${href}?page=${page}`);
   };
 
   return (

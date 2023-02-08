@@ -106,7 +106,7 @@ function MoviePage({
           </div>
 
           <div className="text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-3xl">
-            <Link href={`${selelectedTabMovie.href}/1`}>
+            <Link href={`${selelectedTabMovie.href}?page=1`}>
               <p className="font-medium text-lg py-3 my-3 text-white">
                 View All
               </p>

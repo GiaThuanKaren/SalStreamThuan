@@ -1,32 +1,59 @@
 import React from "react";
-import { MovieModel } from "src/Model";
+import { MovieModel, Result } from "src/Model";
+import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
 interface Props {
   children?: any;
-  MoviePopular?: any;
-  MovieTabData?: any;
-  slideData?: any;
 }
-function WrapperGrid({
-  children,
-  MovieTabData,
-  slideData,
-  MoviePopular,
-}: Props) {
+interface Properties {
+  MoviePopular: Array<MovieModel>;
+  MovieTabData: Array<MovieModel>;
+  slideData: Array<MovieModel>;
+}
+
+// .results
+function WrapperGrid({ children }: Props) {
+  const [properties, Setproperties] = React.useState<Properties>({
+    MoviePopular: [],
+    MovieTabData: [],
+    slideData: [],
+  });
   const SideBarTab = [
     {
       title: "Latest Movie",
-      data: MoviePopular?.results.slice(0, 4),
+      data: properties.MoviePopular?.slice(0, 4),
     },
     {
       title: "Recomendation",
-      data: MovieTabData?.results.slice(0, 4),
+      data: properties.MovieTabData?.slice(0, 4),
     },
     {
       title: "More Movies",
-      data: slideData?.results.slice(0, 4),
+      data: properties.slideData?.slice(0, 4),
     },
   ];
+  React.useEffect(() => {
+    async function FetchApi() {
+      try {
+        let slideDataResult: Result = await GetTreningWeek();
+        let MoviePopularResult: Result = await GetMoveOrTvByParam({
+          href: "/movie/popular",
+        });
+        let MovieTabDataResult: Result = await GetMoveOrTvByParam({
+          href: "/movie/upcoming",
+        });
 
+        let MoviePopular = await GetMoveOrTvByParam({ href: "/movie/popular" });
+        Setproperties({
+          MoviePopular: MoviePopularResult.results,
+          MovieTabData: MovieTabDataResult.results,
+          slideData: slideDataResult.results,
+        });
+      } catch (e) {
+        throw e;
+      }
+    }
+    FetchApi();
+  }, []);
   return (
     <>
       <div className="flex min-h-[100px] items-start">

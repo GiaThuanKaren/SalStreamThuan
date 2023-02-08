@@ -143,7 +143,7 @@ export default function Home({
               })}
             </div>
 
-            <Link href={`${selelectedTabMovie.href}/1`}>
+            <Link href={`${selelectedTabMovie.href}?page=1`}>
               <div className="text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-3xl">
                 <p className="font-medium text-lg py-3 my-3 text-white">
                   View All
@@ -186,7 +186,7 @@ export default function Home({
                   );
                 })}
               </div>
-              <Link href={`${selelectedTabTV.href}/1`} className="block">
+              <Link href={`${selelectedTabTV.href}?page=1`} className="block">
                 <div className="min-w-[100px] text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-xl">
                   <p className=" font-medium text-xs py-1 px-3 my-3 text-white">
                     View All

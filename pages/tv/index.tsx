@@ -90,7 +90,10 @@ function SeriesPage({
             })}
           </div>
           <div className="min-w-[100px] text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-xl">
-            <Link href={`${selelectedTabTV.href}/1`} className="block text-white">
+            <Link
+              href={`${selelectedTabTV.href}?page=1`}
+              className="block text-white"
+            >
               <p className=" font-medium text-xs py-1 px-3 my-3 text-white">
                 View All
               </p>
