@@ -93,11 +93,7 @@ export default function Home({
       <LayoutBasic>
         <div className="min-h-[200vh] w-full">
           <Slider slidedata={slideData["results"]} />
-          <WrapperGrid
-            MoviePopular={MoviePopular}
-            slideData={slideData}
-            MovieTabData={MovieTabData}
-          >
+          <WrapperGrid>
             {/* Movie Tab Start */}
             <div className="flex items-center mt-5">
               <p className="text-4xl font-bold text-white">Movies</p>
