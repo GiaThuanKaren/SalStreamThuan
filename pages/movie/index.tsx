@@ -57,9 +57,7 @@ function MoviePage({
     <>
       <LayoutBasic>
         <WrapperGrid
-          MoviePopular={MoviePopular}
-          slideData={slideData}
-          MovieTabData={MovieTabData}
+        
         >
           <div className="flex items-center mt-5">
             <p className="text-4xl font-bold text-white">Movies</p>

@@ -53,9 +53,7 @@ function SeriesPage({
   return (
     <LayoutBasic>
       <WrapperGrid
-        MoviePopular={MoviePopular}
-        MovieTabData={MovieTabData}
-        slideData={slideData}
+       
       >
         <div className="flex items-center justify-between my-10">
           <p className="text-4xl font-bold text-white">TV Shows</p>

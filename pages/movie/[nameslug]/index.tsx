@@ -25,14 +25,14 @@ function SlugMoviePage() {
       try {
         let result: ResultMovieModel = await GetMoveOrTvByParam({
           href: `/movie/${nameslug}`,
-          page: page,
+          page: page ? (page as string) : "1",
         });
         Setproperties(result);
       } catch (e) {
         throw e;
       }
     }
-    FetchApi()
+    FetchApi();
   }, [page]);
   //   return <></>;
   return (

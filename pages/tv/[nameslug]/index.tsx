@@ -25,7 +25,7 @@ function SlugMoviePage() {
       try {
         let result: ResultTVModel = await GetMoveOrTvByParam({
           href: `/tv/${nameslug}`,
-          page: page,
+          page: page ? page as string : "1",
         });
         Setproperties(result);
       } catch (e) {

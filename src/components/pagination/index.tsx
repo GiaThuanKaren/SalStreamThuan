@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 interface Props {
   totalPages?: number;
-  currentPage?: number;
+  currentPage: number;
   href: string;
 }
 
