@@ -67,7 +67,7 @@ function Header() {
                             key={item.id}
                             href={`/genre/${item.name
                               .toLowerCase()
-                              .replace(/\s/g, "")}/${item.id}`}
+                              .replace(/\s/g, "")}/${item.id}?page=1`}
                           >
                             <li className="px-3 py-2  transition-all hover:text-[#075AB9] hover:bg-[rgb(21,27,50)]">
                               <p className="whitespace-normal text-xs">
@@ -85,7 +85,7 @@ function Header() {
                             key={item.id}
                             href={`/genre/${item.name
                               .toLowerCase()
-                              .replace(/\s/g, "")}/${item.id}`}
+                              .replace(/\s/g, "")}/${item.id}?page=1  `}
                           >
                             <li className="px-3 py-2 transition-all hover:text-[#075AB9] hover:bg-[rgb(21,27,50)]">
                               <p className="whitespace-normal text-xs">
