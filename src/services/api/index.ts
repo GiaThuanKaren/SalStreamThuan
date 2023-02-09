@@ -1,3 +1,4 @@
+import { MovieModel } from "src/Model";
 import axios from "axios";
 const ApiKey: string = "api_key=bec721bcb126b9938b6c2f7b39448c63";
 const Base_Url: string = "https://api.themoviedb.org/3";
@@ -82,4 +83,32 @@ export const SearchMulti = async function (textSearch: any, page?: number) {
   } catch (e) {
     throw e;
   }
+};
+
+export const GetDetailMovie = async function (idMovie: any) {
+  console.log(idMovie, "[IDMOVIE]");
+  try {
+    // let MovieDetail = await axios.get(`${Base_Url}/movie/${idMovie}?${ApiKey}`);
+    // let SimilarMovie = await axios.get(
+    //   `${Base_Url}/movie/${idMovie}/similar?${ApiKey}`
+    // );
+    // let VideoMovie = await axios.get(
+    //   `${Base_Url}/movie/${idMovie}/videos?${ApiKey}`
+    // );
+    // let MovieRecommendation = await axios.get(
+    //   `${Base_Url}/movie/${idMovie}/recommendations?${ApiKey}`
+    // );
+    let DataMovieDetail = await Promise.all([
+      axios.get(`${Base_Url}/movie/${idMovie}?${ApiKey}`),
+      axios.get(`${Base_Url}/movie/${idMovie}/videos?${ApiKey}`),
+      axios.get(`${Base_Url}/movie/${idMovie}/recommendations?${ApiKey}`),
+      axios.get(`${Base_Url}/movie/${idMovie}/similar?${ApiKey}`),
+    ]);
+    return {
+      MovieDetail: DataMovieDetail[0].data,
+      VideoMovie: DataMovieDetail[1].data,
+      MovieRecommendation: DataMovieDetail[2].data,
+      SimilarMovie: DataMovieDetail[3].data,
+    };
+  } catch (e) {}
 };

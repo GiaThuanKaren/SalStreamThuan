@@ -117,7 +117,7 @@ export default function Home({
                           className={` text-lg ${
                             item.title == selelectedTabMovie.title
                               ? "text-white font-medium "
-                              : "text-[#265D95] font-light"
+                              : "text-slate-300 font-light"
                           }   `}
                         >
                           {item?.title}
@@ -225,3 +225,4 @@ export async function getServerSideProps() {
     },
   };
 }
+
