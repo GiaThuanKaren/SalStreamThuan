@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { memo } from "react";
 import { MovieModel } from "src/Model";
 import Image from "../Image";
-
+import { LazyLoadImage } from "react-lazy-load-image-component";
 function MovieItem({ item }: { item: MovieModel }) {
   return (
     <>
@@ -11,7 +11,8 @@ function MovieItem({ item }: { item: MovieModel }) {
           {/*  contend Movie */}
           <div className="h-full  w-full">
             <div className="relative">
-              <img
+              <LazyLoadImage
+                effect="blur"
                 className="h-full object-contain"
                 src={"https://image.tmdb.org/t/p/w300/" + item["poster_path"]}
                 alt="img"

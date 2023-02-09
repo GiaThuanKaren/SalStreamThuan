@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { WrapperGrid } from "src/components";
+import { ModelPopup, WrapperGrid } from "src/components";
 import { LayoutBasic, Mainlayout } from "src/Layout";
 import {
   DetailMovieModel,
@@ -44,6 +44,15 @@ function DetailMovie() {
   }
   return (
     <>
+      {/* <ModelPopup>
+        <iframe
+          width="1264"
+          height="711"
+          src="https://www.youtube.com/embed/euCqAq6BRa4?list=RDMM"
+          title="DJ Snake - Let Me Love You ft. Justin Bieber"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        ></iframe>
+      </ModelPopup> */}
       <LayoutBasic>
         <div className="min-h-0 w-full relative rounded-xl shadow-2xl">
           <div className="min-w-[50px] px-3 py-2 flex items-center justify-center absolute bottom-0 mb-3 w-full ">

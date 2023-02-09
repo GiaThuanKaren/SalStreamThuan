@@ -7,8 +7,8 @@ function LayoutBasic({ children }: Props) {
   return (
     <>
       <Header />
-      <div className="flex items-center justify-center mx-auto xl:mx-[200px]">
-        <div className=" w-full mt-10">
+      <div className="flex items-center justify-center mx-auto xl:mx-[200px] ">
+        <div className=" w-full mt-14">
           {children}
           <Footer />
         </div>
