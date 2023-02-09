@@ -6,7 +6,7 @@ import Image from "../Image";
 function MovieItem({ item }: { item: MovieModel }) {
   return (
     <>
-      <div className="basis-1/5 min-h-[250px]  px-5 py-1 my-3">
+      <div className="basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5 min-h-[250px]  px-5 py-1 my-3">
         <Link href={`/movie/detail/${item.id}`}>
           {/*  contend Movie */}
           <div className="h-full  w-full">

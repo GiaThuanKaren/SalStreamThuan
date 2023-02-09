@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { GetMoveOrTvByParam } from "src/services/api";
+import { ICON, IconSolid } from "src/utils/Icon";
 import SearchBar from "../search";
 interface Genre {
   name: string;
@@ -28,13 +29,16 @@ function Header() {
   }, []);
   return (
     <>
-      <div className="flex items-center justify-center mx-[200px] z-[2] fixed top-0 left-0 right-0">
+      <div className="flex items-center justify-center xl:mx-[200px] z-[2] fixed top-0 left-0 right-0">
         <div
           className={`w-full min-h-[50px] ${
             isTop ? "" : "bg-black "
           }flex items-center justify-between transition-all  `}
         >
-          <div className="flex items-center ">
+          <div className="block md:hidden text-white">
+            <ICON icon={IconSolid.faBars} />
+          </div>
+          <div className="hidden md:flex items-center ">
             <Link href={"/"}>
               <p className="hover:text-blue-400 font-medium">Home</p>
             </Link>
@@ -106,10 +110,12 @@ function Header() {
           </div>
           <div className="flex items-center justify-between">
             <SearchBar />
-            <p className="text-white mx-2 font-medium">Sign In</p>
-            <p className="text-white rounded-lg h-full w-max px-2 py-1 bg-[#007AFF] font-medium text-center">
-              Register
-            </p>
+            <div className="hidden md:flex items-center justify-between mx-2  ">
+              <p className="text-white  font-medium">Sign In</p>
+              <p className="text-white rounded-lg h-full w-max px-2 py-1 bg-[#007AFF] font-medium text-center">
+                Register
+              </p>
+            </div>
           </div>
         </div>
       </div>

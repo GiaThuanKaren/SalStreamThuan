@@ -56,9 +56,11 @@ function WrapperGrid({ children }: Props) {
   }, []);
   return (
     <>
-      <div className="flex min-h-[100px] items-start mt-[30px]  ">
-        <div className="basis-4/5 h-full">{children}</div>
-        <div className="none basis-1/5 px-2">
+      <div className="flex min-h-[100px]  mt-[30px]  ">
+        <div className="md:basis-2/3 lg:basis-2/3 xl:basis-3/4 2xl:basis-4/5 h-full">
+          {children}
+        </div>
+        <div className="hidden md:block md:basis-1/3 lg-basis-1/3  xl:basis-1/4  2xl:basis-1/5 px-2">
           {SideBarTab?.map((item: any, index: number) => {
             return (
               <>
