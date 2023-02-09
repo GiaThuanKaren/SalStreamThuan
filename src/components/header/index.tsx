@@ -29,18 +29,7 @@ function Header() {
     }
     FetchApi();
   }, []);
-  React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (DrawerEle.current && !DrawerEle.current.contains(event.target)) {
-        // User clicked outside of the element, do something here
-        console.log("Out Side Ele");
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [DrawerEle]);
+ 
   return (
     <>
       <div className=" flex items-center justify-center xl:mx-[200px] z-[2] fixed top-0 left-0 right-0">
