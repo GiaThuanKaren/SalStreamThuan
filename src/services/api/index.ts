@@ -69,7 +69,7 @@ export const GetListByIdGenre = async function (
   }
 };
 
-export const SearchMulti = async function (textSearch: any, page: number) {
+export const SearchMulti = async function (textSearch: any, page?: number) {
   console.log(textSearch, "SEARCH TEXT");
   try {
     let { data } = await axios.get(

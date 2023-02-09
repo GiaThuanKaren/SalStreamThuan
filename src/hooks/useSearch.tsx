@@ -22,7 +22,7 @@ const useSearch = function (search: string, delay: number = 300) {
     return () => {
       clearTimeout(handler);
     };
-  }, [value, delay]);
+  }, [search, delay]);
 
   return debouncedValue;
 };

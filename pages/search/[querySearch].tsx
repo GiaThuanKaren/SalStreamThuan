@@ -24,7 +24,7 @@ function PageSearch() {
       try {
         let result = await SearchMulti(
           router.query.querySearch,
-          parseInt(router.query.page)
+          parseInt(router.query.page  as string)
         );
         Setproperties(result);
         console.log("[RESULT SEARCH]", result);
