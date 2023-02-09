@@ -19,7 +19,7 @@ const Pagination: React.FC<Props> = ({ totalPages, currentPage, href }) => {
   return (
     <div className="text-white flex justify-between items-center py-2">
       <button
-        className={`w-12 h-12 p-2 rounded-full border border-gray-300 ${
+        className={`min-w-[100px] h-12 p-2 rounded-full border border-gray-300 ${
           currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
         }`}
         disabled={currentPage === 1}
@@ -32,7 +32,7 @@ const Pagination: React.FC<Props> = ({ totalPages, currentPage, href }) => {
       </div>
 
       <button
-        className={`w-12 h-12 p-2 rounded-full border border-gray-300 ${
+        className={`min-w-[100px] h-12 p-2 rounded-full border border-gray-300 ${
           currentPage === totalPages ? "cursor-not-allowed" : "cursor-pointer"
         }`}
         disabled={currentPage === totalPages}

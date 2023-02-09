@@ -68,3 +68,18 @@ export const GetListByIdGenre = async function (
     throw e;
   }
 };
+
+export const SearchMulti = async function (textSearch: any, page: number) {
+  console.log(textSearch, "SEARCH TEXT");
+  try {
+    let { data } = await axios.get(
+      `${Base_Url}/search/multi?${ApiKey}&query=${textSearch}&page=${
+        page ? page : 1
+      }`
+    );
+    console.log(textSearch, "SEARCH TEXT 1");
+    return data;
+  } catch (e) {
+    throw e;
+  }
+};

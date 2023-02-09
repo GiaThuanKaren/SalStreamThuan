@@ -20,7 +20,7 @@ function DetailGenrePage() {
       try {
         let results: ResultMovieModel = await GetListByIdGenre(
           idgenre as string,
-          page ? page as string : "1"
+          page ? (page as string) : "1"
         );
         Setproperties(results);
       } catch (e) {
@@ -48,7 +48,7 @@ function DetailGenrePage() {
           <Pagination
             href={`/genre/${namegenre}/${idgenre}`}
             totalPages={properties?.total_pages}
-            currentPage={page!=undefined ? parseInt(page as string) : 1}
+            currentPage={page != undefined ? parseInt(page as string) : 1}
           />
         </WrapperGrid>
       </LayoutBasic>
