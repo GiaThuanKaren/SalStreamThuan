@@ -39,14 +39,13 @@ function SlugMoviePage() {
     FetchApi();
   }, [page]);
 
-  //   return <></>;
   return (
     <>
       <LayoutBasic>
         <WrapperGrid>
           <div className="flex flex-wrap">
             {isLoading
-              ? Array.from(Array(10).keys()).map((item: any) => {
+              ? Array.from(Array(20).keys()).map((item: any) => {
                   return (
                     <>
                       <Skeleton />

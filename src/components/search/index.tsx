@@ -38,7 +38,7 @@ function SearchBar() {
               setTextSearchState(e.target.value);
             }}
             type="text"
-            className="flex-1 outline-none mr-1 bg-transparent"
+            className="flex-1 outline-none border-none mr-1 bg-transparent"
           />
           <ICON icon={IconSolid.faMagnifyingGlass} />
         </div>

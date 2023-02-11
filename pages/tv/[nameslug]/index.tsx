@@ -1,7 +1,7 @@
 import React from "react";
 import { LayoutBasic, Mainlayout } from "src/Layout";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { MovieItem, Pagination, TVItem, WrapperGrid } from "src/components";
+import { MovieItem, Pagination, Skeleton, TVItem, WrapperGrid } from "src/components";
 import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
 import { MovieModel, ResultTVModel, TVModel } from "src/Model";
 import { useRouter } from "next/router";
@@ -17,19 +17,25 @@ interface Props {
 }
 function SlugMoviePage() {
   const router = useRouter();
+  const [isLoading, SetisLoading] = React.useState(false);
+
   const { page, nameslug } = router.query;
   const [properties, Setproperties] = React.useState<ResultTVModel>();
   console.log(router);
   React.useEffect(() => {
     async function FetchApi() {
       try {
+        SetisLoading(true);
+
         let result: ResultTVModel = await GetMoveOrTvByParam({
           href: `/tv/${nameslug}`,
-          page: page ? page as string : "1",
+          page: page ? (page as string) : "1",
         });
         Setproperties(result);
       } catch (e) {
         throw e;
+      } finally {
+        SetisLoading(false);
       }
     }
     FetchApi();
@@ -39,7 +45,15 @@ function SlugMoviePage() {
       <LayoutBasic>
         <WrapperGrid>
           <div className="flex flex-wrap">
-            {properties?.results.map((item: TVModel, index: number) => {
+            {isLoading
+              ? Array.from(Array(20).keys()).map((item: any) => {
+                  return (
+                    <>
+                      <Skeleton />
+                    </>
+                  );
+                })
+              : properties?.results.map((item: TVModel, index: number) => {
               return (
                 <>
                   <TVItem item={item} key={index} />
