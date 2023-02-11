@@ -1,6 +1,7 @@
 import Footer from "./footer";
 import Header from "./header";
 import Image from "./Image";
+import ListSkeleton from "./ListItemSkeleton";
 import ModelPopup from "./ModalPopUp";
 import MovieItem from "./MovieItem";
 import Pagination from "./pagination";
@@ -11,6 +12,7 @@ import TVItem from "./TVItem";
 import WrapperGrid from "./wrapper";
 
 export {
+  ListSkeleton,
   Skeleton,
   ModelPopup,
   Image,

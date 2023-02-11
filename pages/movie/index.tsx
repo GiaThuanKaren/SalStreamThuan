@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { MovieItem, WrapperGrid } from "src/components";
+import { ListSkeleton, MovieItem, WrapperGrid } from "src/components";
 import { LayoutBasic, Mainlayout } from "src/Layout";
 import { MovieModel } from "src/Model";
 import { TabMovie, TabTv } from "src/utils";
@@ -34,12 +34,14 @@ function MoviePage({
       data: slideData["results"].slice(0, 4),
     },
   ];
+  const [isLoading, SetisLoading] = React.useState(false);
   const [selelectedTabMovie, SetselectedTabMovie] = React.useState({
     ...TabMovie[0],
     data: MovieTabData["results"],
   });
   const HandleListTabMovie = async function (item: any) {
     try {
+      SetisLoading(true);
       let result = await GetMoveOrTvByParam({ href: item.href });
       console.log(result["results"], 123);
       // SetselectedTabMovie(item);
@@ -51,14 +53,15 @@ function MoviePage({
     } catch (e) {
       console.log(e);
       throw e;
+    } finally {
+      SetisLoading(false);
     }
   };
+
   return (
     <>
       <LayoutBasic>
-        <WrapperGrid
-        
-        >
+        <WrapperGrid>
           <div className="flex items-center mt-5">
             <p className="text-4xl font-bold text-white">Movies</p>
             <div className="flex items-center">
@@ -94,13 +97,17 @@ function MoviePage({
           </div>
 
           <div className="flex flex-wrap">
-            {selelectedTabMovie.data?.map((item: MovieModel) => {
-              return (
-                <>
-                  <MovieItem item={item} />
-                </>
-              );
-            })}
+            {isLoading ? (
+              <ListSkeleton />
+            ) : (
+              selelectedTabMovie.data?.map((item: MovieModel) => {
+                return (
+                  <>
+                    <MovieItem item={item} />
+                  </>
+                );
+              })
+            )}
           </div>
 
           <div className="text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-3xl">

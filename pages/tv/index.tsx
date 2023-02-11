@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { TVItem, WrapperGrid } from "src/components";
+import { ListSkeleton, TVItem, WrapperGrid } from "src/components";
 import { LayoutBasic, Mainlayout } from "src/Layout";
 import { MovieModel, TVModel } from "src/Model";
 import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
@@ -19,6 +19,8 @@ function SeriesPage({
   TvRecomment,
   MoviePopular,
 }: Props) {
+  const [isLoading, SetisLoading] = React.useState(false);
+
   const SideBarTab = [
     {
       title: "Latest Movie",
@@ -33,12 +35,15 @@ function SeriesPage({
       data: slideData["results"].slice(0, 4),
     },
   ];
+
   const [selelectedTabTV, SetselectedTabTV] = React.useState({
     ...TabTv[0],
     data: TVTabData.results,
   });
   const HandleListTabTB = async function (item: any) {
     try {
+      SetisLoading(true);
+
       let result = await GetMoveOrTvByParam({ href: item.href });
       console.log(result["results"], 123, "TV");
       SetselectedTabTV({
@@ -48,13 +53,13 @@ function SeriesPage({
       });
     } catch (e) {
       throw e;
+    } finally {
+      SetisLoading(false);
     }
   };
   return (
     <LayoutBasic>
-      <WrapperGrid
-       
-      >
+      <WrapperGrid>
         <div className="flex items-center justify-between my-10">
           <p className="text-4xl font-bold text-white">TV Shows</p>
           <div className="flex  items-center">
@@ -100,13 +105,17 @@ function SeriesPage({
         </div>
 
         <div className="flex flex-wrap">
-          {selelectedTabTV.data?.map((item: TVModel, index: number) => {
-            return (
-              <>
-                <TVItem item={item} />
-              </>
-            );
-          })}
+          {isLoading ? (
+            <ListSkeleton />
+          ) : (
+            selelectedTabTV.data?.map((item: TVModel, index: number) => {
+              return (
+                <>
+                  <TVItem item={item} />
+                </>
+              );
+            })
+          )}
         </div>
       </WrapperGrid>
     </LayoutBasic>

@@ -1,7 +1,14 @@
 import React from "react";
 import { LayoutBasic, Mainlayout } from "src/Layout";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { MovieItem, Pagination, Skeleton, TVItem, WrapperGrid } from "src/components";
+import {
+  ListSkeleton,
+  MovieItem,
+  Pagination,
+  Skeleton,
+  TVItem,
+  WrapperGrid,
+} from "src/components";
 import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
 import { MovieModel, ResultTVModel, TVModel } from "src/Model";
 import { useRouter } from "next/router";
@@ -45,21 +52,17 @@ function SlugMoviePage() {
       <LayoutBasic>
         <WrapperGrid>
           <div className="flex flex-wrap">
-            {isLoading
-              ? Array.from(Array(20).keys()).map((item: any) => {
-                  return (
-                    <>
-                      <Skeleton />
-                    </>
-                  );
-                })
-              : properties?.results.map((item: TVModel, index: number) => {
-              return (
-                <>
-                  <TVItem item={item} key={index} />
-                </>
-              );
-            })}
+            {isLoading ? (
+              <ListSkeleton />
+            ) : (
+              properties?.results.map((item: TVModel, index: number) => {
+                return (
+                  <>
+                    <TVItem item={item} key={index} />
+                  </>
+                );
+              })
+            )}
           </div>
 
           <Pagination
