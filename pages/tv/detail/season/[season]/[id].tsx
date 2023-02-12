@@ -34,7 +34,8 @@ function DetailSeason() {
     <>
       <LayoutBasic>
         <div className="flex mt=[30px]">
-          <div className="basis-full md:basis-2/3 lg:basis-2/3 xl:basis-3/4 2xl:basis-4/5 h-full">
+          {/* md:basis-2/3 lg:basis-2/3 xl:basis-3/4 2xl:basis-4/5 */}
+          <div className="basis-full  h-full">
             {isLoading ? (
               <div
                 role="status"
@@ -55,15 +56,26 @@ function DetailSeason() {
               <iframe
                 allowFullScreen
                 className="w-full h-[500px]"
-                src={`https://www.2embed.to/embed/tmdb/movie?id=${id}&s=${season}&e=${episode}`}
+                src={`https://www.2embed.to/embed/tmdb/tv?id=${id}&s=${season}&e=${episode}`}
               ></iframe>
             )}
-          </div>
-          <div className="hidden md:block md:basis-1/3 lg-basis-1/3  xl:basis-1/4  2xl:basis-1/5 px-2">
-            <div className="bg-white text-black h-12 w-full flex items-center justify-center font-medium">
-              <p>Episode 1</p>
+            <div className="flex flex-wrap my-5">
+              {dataEpisode?.map((item: Episode, index: number) => {
+                return (
+                  <>
+                    <div onClick={()=>{
+                      Setepisode(item["episode_number"])
+                    }} className="hover:cursor-pointer    h-12 w-full  font-medium basis-1/2 md:basis-1/3 lg:basis-1/4 px-3 py-1">
+                      <div className="bg-white text-black w-full h-full flex items-center justify-center">
+                        <p>Episode {item["episode_number"]}</p>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
             </div>
           </div>
+          {/* <div className="hidden md:block md:basis-1/3 lg-basis-1/3  xl:basis-1/4  2xl:basis-1/5 px-2"></div> */}
         </div>
       </LayoutBasic>
     </>

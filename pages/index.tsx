@@ -213,13 +213,15 @@ export default function Home({
             <div className="flex flex-wrap">
               {isLoadingTV ? (
                 <ListSkeleton />
-              ) : selelectedTabTV.data?.map((item: TVModel, index: number) => {
-                return (
-                  <>
-                    <TVItem item={item} />
-                  </>
-                );
-              })}
+              ) : (
+                selelectedTabTV.data?.map((item: TVModel, index: number) => {
+                  return (
+                    <>
+                      <TVItem item={item} />
+                    </>
+                  );
+                })
+              )}
             </div>
 
             {/* TV Tab End */}
