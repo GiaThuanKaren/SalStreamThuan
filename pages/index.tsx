@@ -2,7 +2,13 @@ import Head from "next/head";
 import Image from "next/image";
 import React from "react";
 
-import { MovieItem, Slider, TVItem, WrapperGrid } from "src/components";
+import {
+  ListSkeleton,
+  MovieItem,
+  Slider,
+  TVItem,
+  WrapperGrid,
+} from "src/components";
 import { LayoutBasic, Mainlayout } from "src/Layout";
 import { MovieModel, TVModel } from "src/Model";
 import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
@@ -58,8 +64,11 @@ export default function Home({
     data: TVTabData.results,
   });
   console.log(selelectedTabMovie);
+  const [isLoadingMovie, SetisLoadingMovie] = React.useState(false);
+  const [isLoadingTV, SetisLoadingTV] = React.useState(false);
   const HandleListTabMovie = async function (item: any) {
     try {
+      SetisLoadingMovie(true);
       let result = await GetMoveOrTvByParam({ href: item.href });
       console.log(result["results"], 123);
       // SetselectedTabMovie(item);
@@ -71,11 +80,15 @@ export default function Home({
     } catch (e) {
       console.log(e);
       throw e;
+    } finally {
+      SetisLoadingMovie(false);
     }
   };
 
   const HandleListTabTB = async function (item: any) {
     try {
+      SetisLoadingTV(true);
+
       let result = await GetMoveOrTvByParam({ href: item.href });
       console.log(result["results"], 123, "TV");
       SetselectedTabTV({
@@ -85,6 +98,8 @@ export default function Home({
       });
     } catch (e) {
       throw e;
+    } finally {
+      SetisLoadingTV(false);
     }
   };
   React.useEffect(() => {}, []);
@@ -130,13 +145,17 @@ export default function Home({
             </div>
 
             <div className="flex flex-wrap">
-              {selelectedTabMovie.data?.map((item: MovieModel) => {
-                return (
-                  <>
-                    <MovieItem item={item} />
-                  </>
-                );
-              })}
+              {isLoadingMovie ? (
+                <ListSkeleton />
+              ) : (
+                selelectedTabMovie.data?.map((item: MovieModel) => {
+                  return (
+                    <>
+                      <MovieItem item={item} />
+                    </>
+                  );
+                })
+              )}
             </div>
 
             <Link href={`${selelectedTabMovie.href}?page=1`}>
@@ -192,7 +211,9 @@ export default function Home({
             </div>
 
             <div className="flex flex-wrap">
-              {selelectedTabTV.data?.map((item: TVModel, index: number) => {
+              {isLoadingTV ? (
+                <ListSkeleton />
+              ) : selelectedTabTV.data?.map((item: TVModel, index: number) => {
                 return (
                   <>
                     <TVItem item={item} />
@@ -225,4 +246,3 @@ export async function getServerSideProps() {
     },
   };
 }
-

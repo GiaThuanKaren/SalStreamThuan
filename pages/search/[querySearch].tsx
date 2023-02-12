@@ -34,7 +34,7 @@ function PageSearch() {
       }
     }
     FetchApi();
-  }, [router.query.page]);
+  }, [router.query.page,querySearch]);
   return (
     <>
       <LayoutBasic>

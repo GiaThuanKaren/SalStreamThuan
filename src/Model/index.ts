@@ -92,6 +92,8 @@ export interface DetailMovieModel {
   vote_count: number;
 }
 
+
+
 export interface Genre {
   id: number;
   name: string;
@@ -130,4 +132,43 @@ export interface Result {
   official: boolean
   published_at: string
   id: string
+}
+
+
+
+
+
+
+export interface CreatedBy {
+  id: number
+  credit_id: string
+  name: string
+  gender: number
+  profile_path: string
+}
+
+
+export interface Network {
+  name: string
+  id: number
+  logo_path: string
+  origin_country: string 
+}
+
+
+
+export interface Season {
+  air_date: string
+  episode_count: number
+  id: number
+  name: string
+  overview: string
+  poster_path: string
+  season_number: number
+}
+
+export interface SpokenLanguage {
+  english_name: string
+  iso_639_1: string
+  name: string
 }

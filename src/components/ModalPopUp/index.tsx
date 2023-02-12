@@ -1,10 +1,13 @@
 import React from "react";
 
-function ModelPopup({ children }: any) {
+function ModelPopup({ children, hanldle, state }: any) {
   return (
     <>
-      <div className="h-screen w-screen flex items-center justify-center">
-        <div className="max-w-[80%] max-h-[70%] bg-white">{children}</div>
+      <div
+        onClick={hanldle}
+        className="h-screen w-screen flex items-center justify-center fixed top-0 right-0 left-0 bottom-0 z-[3]"
+      >
+        {children}
       </div>
     </>
   );

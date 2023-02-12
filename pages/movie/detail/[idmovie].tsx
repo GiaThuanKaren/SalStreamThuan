@@ -23,6 +23,7 @@ function DetailMovie() {
   const router = useRouter();
   const { idmovie } = router.query;
   const [isLoading, SetisLoading] = React.useState(false);
+  const [isOpenTrailer, SetisOpenTrailer] = React.useState(false);
   const [properties, Setproperties] = React.useState<InfoDetailMovieModel>();
   React.useEffect(() => {
     async function FetchApi() {
@@ -45,6 +46,28 @@ function DetailMovie() {
   return (
     <>
       <LayoutBasic>
+        {isOpenTrailer && properties?.VideoMovie.results.length != 0 && (
+          <ModelPopup
+            handle={() => {
+              SetisOpenTrailer(false);
+            }}
+          >
+            <div
+              onClick={(e) => {
+                // e.stopPropagation();
+              }}
+              className="w-[80%] max-w-[80%] h-[50%] max-h-[70%]  bg-black"
+            >
+              <iframe
+                className="w-full h-full"
+                height="711"
+                src={`https://www.youtube.com/embed/${properties?.VideoMovie.results[0].key}`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen={true}
+              ></iframe>
+            </div>
+          </ModelPopup>
+        )}
         <div className="min-h-0 w-full relative rounded-xl shadow-2xl">
           {isLoading ? (
             <div className="animate-pulse w-full h-full">
@@ -65,7 +88,13 @@ function DetailMovie() {
               <div className="min-w-[50px] px-3 py-2 flex items-center justify-center absolute bottom-0 mb-3 w-full ">
                 <div className="flex items-center text-white bg-gray-300 rounded-2xl px-4 py-2 ">
                   <ICON className="mx-2" icon={IconSolid.faPlay} />
-                  <p>Trailer</p>
+                  <p
+                    onClick={() => {
+                      console.log("ksjdklfjlj");
+                    }}
+                  >
+                    Trailer
+                  </p>
                 </div>
               </div>
               <div className="h-full w-full absolute top-0 left-0 right-0 bottom-0 bg-[#0000005b]"></div>
