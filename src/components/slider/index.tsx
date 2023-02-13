@@ -31,6 +31,7 @@ function Slider({ slidedata = [] }: Props) {
           return (
             <>
               <SwiperSlide key={index}>
+              
                 <div className="h-full w-full relative bg-slate-200 flex justify-center items-center">
                   {/* bg-slider */}
                   <div
@@ -75,7 +76,7 @@ function Slider({ slidedata = [] }: Props) {
                       <p className="text-white text-xl h-40  overflow-y-auto text-overflow-ellipsis">
                         {item["overview"]}
                       </p>
-                      <Link href={""} className="mt-3 block">
+                      <Link href={`/movie/detail/${item.id}`} className="mt-3 block">
                         <div className="flex items-center bg-[#007AFF] w-max px-3 py-1 rounded-2xl">
                           <ICON icon={IconSolid.faPlay} />
                           <p className="text-white ml-3">Watch Movie</p>
@@ -84,6 +85,7 @@ function Slider({ slidedata = [] }: Props) {
                     </div>
                   </div>
                 </div>
+               
               </SwiperSlide>
             </>
           );

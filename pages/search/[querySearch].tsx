@@ -1,6 +1,12 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { MovieItem, Pagination, TVItem, WrapperGrid } from "src/components";
+import {
+  ListSkeleton,
+  MovieItem,
+  Pagination,
+  TVItem,
+  WrapperGrid,
+} from "src/components";
 import { LayoutBasic } from "src/Layout";
 import { SearchItemModel } from "src/Model";
 import { SearchMulti } from "src/services/api";
@@ -16,41 +22,51 @@ function PageSearch() {
   const router = useRouter();
   const { querySearch, page } = router.query;
   const [properties, Setproperties] = React.useState<SearchResultModel>();
+  const [isLoading, SetisLoading] = React.useState(false);
   console.log(querySearch, page, "QUERY SEARCH");
   console.log(router);
 
   React.useEffect(() => {
     async function FetchApi() {
       try {
+        SetisLoading(true);
         let result = await SearchMulti(
           router.query.querySearch,
-          parseInt(router.query.page  as string)
+          parseInt(router.query.page as string)
         );
         Setproperties(result);
         console.log("[RESULT SEARCH]", result);
       } catch (e) {
         console.log(e);
         throw e;
+      } finally {
+        SetisLoading(false);
       }
     }
     FetchApi();
-  }, [router.query.page,querySearch]);
+  }, [router.query.page, querySearch]);
   return (
     <>
       <LayoutBasic>
         <WrapperGrid>
           <div className="flex flex-wrap">
-            {properties?.results.map((item: SearchItemModel, index: number) => {
-              if (item.media_type == "movie") {
-                return <MovieItem item={item} key={index} />;
-              } else {
-                return (
-                  <>
-                    <TVItem item={item} key={index} />
-                  </>
-                );
-              }
-            })}
+            {isLoading ? (
+              <ListSkeleton />
+            ) : (
+              properties?.results.map(
+                (item: SearchItemModel, index: number) => {
+                  if (item.media_type == "movie") {
+                    return <MovieItem item={item} key={index} />;
+                  } else {
+                    return (
+                      <>
+                        <TVItem item={item} key={index} />
+                      </>
+                    );
+                  }
+                }
+              )
+            )}
           </div>
           <Pagination
             href={`/search/${router.query.querySearch}`}
