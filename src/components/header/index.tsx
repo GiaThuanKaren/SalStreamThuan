@@ -11,7 +11,7 @@ interface Genre {
 }
 function Header() {
   const { data: session, status } = useSession();
-  const {push, asPath}= useRouter();
+  const { push, asPath } = useRouter();
   const [isTop, setisTop] = React.useState(false);
   const [isDrawerOpen, SetisDrawerOpen] = React.useState(false);
   const [genre, Setgenre] = React.useState([]);
@@ -214,18 +214,21 @@ function Header() {
             {status === "authenticated" ? (
               <>
                 <div className="relative">
-                  
                   <img
                     className="w-10 h-10 rounded-full"
                     src={session?.user?.image as string}
                     alt="Rounded avatar"
                   ></img>
                   <ul className="absolute top-[calc(100%_+_10px)] bg-white min-h-[30px] right-0 ">
-                    <li onClick={async ()=>{
-                      await signOut();
-                      push("/")
-                      
-                    }} className="h-5 px-3  block">
+                    <li
+                      onClick={async () => {
+                        await signOut({
+                          redirect: true,
+                          callbackUrl: "/",
+                        });
+                      }}
+                      className="h-5 px-3  block"
+                    >
                       <p className="font-medium text-xs whitespace-nowrap">
                         Sign Out
                       </p>
@@ -233,7 +236,6 @@ function Header() {
                   </ul>
                 </div>
               </>
-               
             ) : (
               <Link href={`/signin`}>
                 <p className="text-white  font-medium">Sign In</p>

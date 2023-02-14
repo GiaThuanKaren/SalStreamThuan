@@ -24,8 +24,11 @@ function Sigin() {
   const handleOAuthSignIn = async (provider: string) => {
     try {
       console.log("[PROVIDER]", provider);
-      signIn(provider);
-      push("/");
+      signIn(provider,{
+        redirect:true,
+        callbackUrl:"/"
+      });
+      
     } catch (error) {
       console.log(error)
     }
