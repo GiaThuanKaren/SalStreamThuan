@@ -2,12 +2,16 @@ import Link from "next/link";
 import React, { useRef } from "react";
 import { GetMoveOrTvByParam } from "src/services/api";
 import { ICON, IconSolid } from "src/utils/Icon";
+import { signOut, useSession } from "next-auth/react";
 import SearchBar from "../search";
+import { useRouter } from "next/router";
 interface Genre {
   name: string;
   id: number;
 }
 function Header() {
+  const { data: session, status } = useSession();
+  const {push, asPath}= useRouter();
   const [isTop, setisTop] = React.useState(false);
   const [isDrawerOpen, SetisDrawerOpen] = React.useState(false);
   const [genre, Setgenre] = React.useState([]);
@@ -29,7 +33,7 @@ function Header() {
     }
     FetchApi();
   }, []);
- 
+
   return (
     <>
       <div className=" flex items-center justify-center xl:mx-[200px] z-[2] fixed top-0 left-0 right-0">
@@ -207,14 +211,34 @@ function Header() {
           </div>
           <div className="flex items-center justify-between">
             <SearchBar />
-            <div className="hidden md:flex items-center justify-between mx-2  ">
-              <Link href={"/signin"}>
-              <p className="text-white  font-medium">Sign In</p>
+            {status === "authenticated" ? (
+              <>
+                <div className="relative">
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    className="w-10 h-10 rounded-full"
+                    src={session?.user?.image as string}
+                    alt="Rounded avatar"
+                  ></img>
+                  <ul className="absolute top-[calc(100%_+_10px)] bg-white min-h-[30px] right-0 ">
+                    <li onClick={async ()=>{
+                      await signOut();
+                      push("/")
+                      
+                    }} className="h-5 px-3  block">
+                      <p className="font-medium text-xs whitespace-nowrap">
+                        Sign Out
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              </>
+               
+            ) : (
+              <Link href={`/signin`}>
+                <p className="text-white  font-medium">Sign In</p>
               </Link>
-              {/* <p className="text-white rounded-lg h-full w-max px-2 py-1 bg-[#007AFF] font-medium text-center">
-                Register
-              </p> */}
-            </div>
+            )}
           </div>
         </div>
       </div>

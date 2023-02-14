@@ -1,13 +1,18 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
-import 'react-lazy-load-image-component/src/effects/blur.css';
-
-export default function App({ Component, pageProps }: AppProps) {
+import "react-lazy-load-image-component/src/effects/blur.css";
+import { SessionProvider } from "next-auth/react";
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   return (
     <>
-      <NextNProgress />
-      <Component {...pageProps} />
+      <SessionProvider session={session}>
+        <NextNProgress />
+        <Component {...pageProps} />
+      </SessionProvider>
     </>
   );
 }
