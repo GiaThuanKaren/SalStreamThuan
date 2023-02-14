@@ -208,10 +208,12 @@ function Header() {
           <div className="flex items-center justify-between">
             <SearchBar />
             <div className="hidden md:flex items-center justify-between mx-2  ">
+              <Link href={"/signin"}>
               <p className="text-white  font-medium">Sign In</p>
-              <p className="text-white rounded-lg h-full w-max px-2 py-1 bg-[#007AFF] font-medium text-center">
+              </Link>
+              {/* <p className="text-white rounded-lg h-full w-max px-2 py-1 bg-[#007AFF] font-medium text-center">
                 Register
-              </p>
+              </p> */}
             </div>
           </div>
         </div>
