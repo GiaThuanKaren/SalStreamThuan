@@ -8,7 +8,7 @@ interface Item {
   Icon: JSX.Element;
   name: string;
 }
-function sigin() {
+function Sigin() {
   
   const { push } = useRouter();
   const providers = [
@@ -25,7 +25,7 @@ function sigin() {
     try {
       console.log("[PROVIDER]", provider);
       signIn(provider);
-      await push("/");
+      push("/");
     } catch (error) {
       console.log(error)
     }
@@ -61,4 +61,4 @@ function sigin() {
   );
 }
 
-export default sigin;
+export default Sigin;

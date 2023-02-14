@@ -214,7 +214,7 @@ function Header() {
             {status === "authenticated" ? (
               <>
                 <div className="relative">
-                  // eslint-disable-next-line @next/next/no-img-element
+                  
                   <img
                     className="w-10 h-10 rounded-full"
                     src={session?.user?.image as string}
