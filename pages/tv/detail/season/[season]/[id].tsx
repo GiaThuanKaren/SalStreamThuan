@@ -63,10 +63,24 @@ function DetailSeason() {
               {dataEpisode?.map((item: Episode, index: number) => {
                 return (
                   <>
-                    <div onClick={()=>{
-                      Setepisode(item["episode_number"])
-                    }} className="hover:cursor-pointer    h-12 w-full  font-medium basis-1/2 md:basis-1/3 lg:basis-1/4 px-3 py-1">
-                      <div className="bg-white text-black w-full h-full flex items-center justify-center">
+                    <div
+                      onClick={() => {
+                        Setepisode(item["episode_number"]);
+                      }}
+                      className={
+                        "hover:cursor-pointer    h-12 w-full  font-medium basis-1/2 md:basis-1/3 lg:basis-1/4 px-3 py-1"
+                      }
+                    >
+                      <div
+                        className={
+                          `${
+                            item["episode_number"] == episode
+                              ? "bg-[#007AFF] text-white font-medium"
+                              : "bg-white text-black"
+                          }` +
+                          " w-full h-full flex items-center justify-center"
+                        }
+                      >
                         <p>Episode {item["episode_number"]}</p>
                       </div>
                     </div>

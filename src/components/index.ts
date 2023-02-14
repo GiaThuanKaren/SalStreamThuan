@@ -7,11 +7,13 @@ import MovieItem from "./MovieItem";
 import Pagination from "./pagination";
 import SearchBar from "./search";
 import Skeleton from "./SkeletonItem";
+import SkeletonSideBar from "./SkeletonSideBar";
 import Slider from "./slider";
 import TVItem from "./TVItem";
 import WrapperGrid from "./wrapper";
 
 export {
+  SkeletonSideBar,
   ListSkeleton,
   Skeleton,
   ModelPopup,
