@@ -1,4 +1,4 @@
-# SalStream ( Next.JS )
+# SalStream ( Next.JS - TypeScript )
 
 ## My WorkSpace
 
@@ -10,7 +10,7 @@
   - NextAuth
   - MongoDB
   - TMDB API
-
+  - TypeScript 
 
 # Screenshot
 
