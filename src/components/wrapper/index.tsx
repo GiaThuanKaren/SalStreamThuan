@@ -57,7 +57,7 @@ function WrapperGrid({ children }: Props) {
   }, []);
   return (
     <>
-      <div className="flex min-h-[100px]  mt-[30px]  ">
+      <div className="flex   mt-[30px]  ">
         <div className="md:basis-2/3 lg:basis-2/3 xl:basis-3/4 2xl:basis-4/5 h-full">
           {children}
         </div>

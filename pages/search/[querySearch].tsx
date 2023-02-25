@@ -43,7 +43,9 @@ function PageSearch() {
         SetisLoading(false);
       }
     }
-    FetchApi();
+    if (querySearch) {
+      FetchApi();
+    }
   }, [router.query.page, querySearch]);
   return (
     <>

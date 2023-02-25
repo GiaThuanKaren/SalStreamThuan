@@ -60,9 +60,11 @@ function SeriesPage({
   return (
     <LayoutBasic>
       <WrapperGrid>
-        <div className="flex items-center justify-between my-10">
-          <p className="text-4xl font-bold text-white">TV Shows</p>
-          <div className="flex  items-center">
+        <div className="flex items-center justify-between my-10 flex-wrap">
+          <p className="text-lg whitespace-nowrap md:text-4xl font-bold text-white my-3">
+            TV Shows
+          </p>
+          <div className="flex  items-center w-full  ">
             {TabTv?.map((item: any, index: number) => {
               return (
                 <>
@@ -79,7 +81,7 @@ function SeriesPage({
                     }
                   >
                     <p
-                      className={` text-lg ${
+                      className={` text-base whitespace-nowrap md:text-lg ${
                         item.title == selelectedTabTV.title
                           ? "text-white font-medium "
                           : "text-[#265D95] font-light"
@@ -92,7 +94,7 @@ function SeriesPage({
               );
             })}
           </div>
-          <div className="min-w-[100px] text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-xl">
+          {/* <div className="hidden md:block min-w-[100px] text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-xl">
             <Link
               href={`${selelectedTabTV.href}?page=1`}
               className="block text-white"
@@ -101,7 +103,7 @@ function SeriesPage({
                 View All
               </p>
             </Link>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex flex-wrap">
@@ -116,6 +118,17 @@ function SeriesPage({
               );
             })
           )}
+        </div>
+
+        <div className=" min-w-[100px] text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-xl">
+          <Link
+            href={`${selelectedTabTV.href}?page=1`}
+            className="block text-white"
+          >
+            <p className=" font-medium text-xs py-3  px-3 my-3 text-white">
+              View All
+            </p>
+          </Link>
         </div>
       </WrapperGrid>
     </LayoutBasic>

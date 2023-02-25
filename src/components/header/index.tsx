@@ -15,6 +15,7 @@ function Header() {
   const [isTop, setisTop] = React.useState(false);
   const [isDrawerOpen, SetisDrawerOpen] = React.useState(false);
   const [genre, Setgenre] = React.useState([]);
+  const [isOpenNav, SetOpenNav] = React.useState(false);
   const [isOpengenre, SetIsOpengenre] = React.useState(false);
   const DrawerEle = useRef(null);
   React.useEffect(() => {
@@ -36,13 +37,13 @@ function Header() {
 
   return (
     <>
-      <div className=" flex items-center justify-center xl:mx-[200px] z-[2] fixed top-0 left-0 right-0">
+      <div className=" flex items-center justify-center xl:mx-[200px] z-[2] fixed top-0 left-0 right-0 ">
         {isDrawerOpen && (
           <div
             // ref={DrawerEle}
-            className="h-screen flex justify-between  z-[3]  absolute left-0 top-0 bottom-0 right-0"
+            className="min-h-screen flex justify-between  z-[3]  absolute left-0 top-0 bottom-0 right-0"
           >
-            <div className="min-w-[100px] h-full bg-slate-300  ">
+            <div className="min-w-[100px] h-full bg-slate-300 px-2 py-1  ">
               <Link href={"/"}>
                 <p className="hover:text-blue-400 text-black font-medium">
                   Home
@@ -129,9 +130,9 @@ function Header() {
         <div
           className={`w-full min-h-[50px] ${
             isTop ? "" : "bg-black "
-          }flex items-center justify-between transition-all px-2 sm:px-0 py-3iS `}
+          }flex items-center justify-between transition-all px-2 py-3 sm:px-0 py-3iS `}
         >
-          <div
+          <div 
             onClick={() => {
               SetisDrawerOpen(true);
             }}
@@ -213,32 +214,39 @@ function Header() {
             <SearchBar />
             {status === "authenticated" ? (
               <>
-                <div className="relative">
+                <div
+                  onClick={() => {
+                    SetOpenNav(!isOpenNav);
+                  }}
+                  className="relative"
+                >
                   <img
                     className="w-10 h-10 rounded-full"
                     src={session?.user?.image as string}
                     alt="Rounded avatar"
                   ></img>
-                  <ul className="absolute top-[calc(100%_+_10px)] bg-white min-h-[30px] right-0 ">
-                    <li
-                      onClick={async () => {
-                        await signOut({
-                          redirect: true,
-                          callbackUrl: "/",
-                        });
-                      }}
-                      className="h-5 px-3  block"
-                    >
-                      <p className="font-medium text-xs whitespace-nowrap">
-                        Sign Out
-                      </p>
-                    </li>
-                  </ul>
+                  {isOpenNav && (
+                    <ul className="absolute top-[calc(100%_+_10px)] bg-white min-h-[30px] right-0 ">
+                      <li
+                        onClick={async () => {
+                          await signOut({
+                            redirect: true,
+                            callbackUrl: "/",
+                          });
+                        }}
+                        className="h-5 px-3  block"
+                      >
+                        <p className="font-medium text-xs whitespace-nowrap">
+                          Sign Out
+                        </p>
+                      </li>
+                    </ul>
+                  )}
                 </div>
               </>
             ) : (
               <Link href={`/signin`}>
-                <p className="text-white  font-medium">Sign In</p>
+                <p className="text-white  font-medium ml-3">Sign In</p>
               </Link>
             )}
           </div>

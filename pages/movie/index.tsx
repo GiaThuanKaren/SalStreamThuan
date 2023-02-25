@@ -62,8 +62,10 @@ function MoviePage({
     <>
       <LayoutBasic>
         <WrapperGrid>
-          <div className="flex items-center mt-5">
-            <p className="text-4xl font-bold text-white">Movies</p>
+          <div className="flex flex-wrap items-center mt-5">
+            <p className="text-lg whitespace-nowrap md:text-4xl font-bold text-white">
+              Movies
+            </p>
             <div className="flex items-center">
               {TabMovie?.map((item: any, index: number) => {
                 return (
@@ -81,7 +83,7 @@ function MoviePage({
                       }
                     >
                       <p
-                        className={` text-lg ${
+                        className={` text-base whitespace-nowrap md:text-lg ${
                           item.title == selelectedTabMovie.title
                             ? "text-white font-medium "
                             : "text-[#265D95] font-light"

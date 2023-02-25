@@ -16,20 +16,23 @@ function DetailSeason() {
     async function FetchApi() {
       try {
         SetisLoading(true);
+        console.log(id,season,"Detail Season")
         let result: DetailSeaon = await (
-          await GetDetailSeason(id, season)
+          await GetDetailSeason(router.query.id, router.query.season)
         ).detailSeason;
         console.log(result);
 
         SetdataEpisode(result.episodes);
       } catch (e) {
+        throw e
       } finally {
         SetisLoading(false);
       }
     }
-
-    FetchApi();
-  }, [episode]);
+    if (router.query.episode ) {
+      FetchApi();
+    }
+  }, [router.query.episode]);
   return (
     <>
       <LayoutBasic>
@@ -77,8 +80,7 @@ function DetailSeason() {
                             item["episode_number"] == episode
                               ? "bg-[#007AFF] text-white font-medium"
                               : "bg-white text-black"
-                          }` +
-                          " w-full h-full flex items-center justify-center"
+                          }` + " w-full h-full flex items-center justify-center"
                         }
                       >
                         <p>Episode {item["episode_number"]}</p>
