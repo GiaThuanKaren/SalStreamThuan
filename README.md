@@ -23,6 +23,10 @@
 
 ![image](https://user-images.githubusercontent.com/86192249/218677891-45873845-66e4-47c6-be8f-48f0c9421f3c.png)
 
+## TV Detail Season
+
+![image](https://user-images.githubusercontent.com/86192249/221354355-793f25c9-35c7-4947-b287-7e0e7b46c388.png)
+
 
 ##  Login Page
 
