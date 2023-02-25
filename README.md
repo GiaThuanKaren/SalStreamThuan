@@ -12,6 +12,16 @@
   - TMDB API
   - TypeScript 
 
+- ## Feature 🐥
+  - [x] Can Watch Movie /TV Shows
+  - [ ] Login With Social 
+    - [x] Google
+    - [ ] Facebook
+    - [ ] Github
+  - [ ] Coment Movie/TV
+  - [ ] Push nofication when user comment 
+   
+
 # Screenshot
 
 ## Home Page
