@@ -14,6 +14,7 @@
 
 - ## Feature 🐥
   - [x] Can Watch Movie /TV Shows
+  - [x] Responsive on mobile/tablet
   - [ ] Login With Social 
     - [x] Google
     - [ ] Facebook
