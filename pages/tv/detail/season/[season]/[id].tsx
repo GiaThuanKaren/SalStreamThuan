@@ -1,3 +1,4 @@
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import { LayoutBasic } from "src/Layout";
@@ -16,7 +17,7 @@ function DetailSeason() {
     async function FetchApi() {
       try {
         SetisLoading(true);
-        console.log(id,season,"Detail Season")
+        console.log(id, season, "Detail Season");
         let result: DetailSeaon = await (
           await GetDetailSeason(router.query.id, router.query.season)
         ).detailSeason;
@@ -24,14 +25,12 @@ function DetailSeason() {
 
         SetdataEpisode(result.episodes);
       } catch (e) {
-        throw e
+        throw e;
       } finally {
         SetisLoading(false);
       }
     }
-    if (router.query.episode ) {
-      FetchApi();
-    }
+    FetchApi();
   }, [router.query.episode]);
   return (
     <>
@@ -99,3 +98,13 @@ function DetailSeason() {
 }
 
 export default DetailSeason;
+
+export const getServerSideProps: GetServerSideProps = async function ({
+  query,
+  params
+}) {
+  console.log(query,params,"Query From Server Side");
+  return {
+    props: {},
+  };
+};
