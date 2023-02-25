@@ -39,7 +39,9 @@ function DetailMovie() {
         throw e;
       }
     }
-    FetchApi();
+    if (router.query.idmovie) {
+      FetchApi();
+    }
   }, [idmovie]);
   console.log(properties);
 

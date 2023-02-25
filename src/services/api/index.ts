@@ -6,7 +6,7 @@ const ImageOption = {
   w500: "https://image.tmdb.org/t/p/w500",
   original: "https://image.tmdb.org/t/p/original",
 };
-import {DetailSeaon} from "src/Model/tv"
+import { DetailSeaon } from "src/Model/tv";
 
 export const GetMoveOrTvByParam = async function ({
   title,
@@ -118,6 +118,7 @@ export const GetDetailMovie = async function (idMovie: any) {
 
 export const GetDetailTV = async function (IdTV: any) {
   try {
+    console.log("ID TV DETAIL", IdTV);
     let DataTVDetail = await Promise.all([
       axios.get(`${Base_Url}/tv/${IdTV}?${ApiKey}`),
       axios.get(`${Base_Url}/tv/${IdTV}/videos?${ApiKey}`),
@@ -136,16 +137,16 @@ export const GetDetailTV = async function (IdTV: any) {
 };
 
 export const GetDetailSeason = async function (IdTV: any, NumberSeaon: any) {
-  
   try {
     let detailSeason = await axios.get(
       `${Base_Url}/tv/${IdTV}/season/${NumberSeaon}?${ApiKey}`
     );
-    console.log(`${Base_Url}/tv/${IdTV}/season/${NumberSeaon}/episode/1?${ApiKey}`)
+    console.log(
+      `${Base_Url}/tv/${IdTV}/season/${NumberSeaon}/episode/1?${ApiKey}`
+    );
     return {
       detailSeason: detailSeason.data,
-    }
-    
+    };
   } catch (e) {
     throw e;
   }

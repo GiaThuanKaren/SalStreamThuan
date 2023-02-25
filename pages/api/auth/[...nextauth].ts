@@ -10,7 +10,7 @@ export const authOptions = {
       clientSecret: "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",
       
     }),
-  
+    
 
     // ...add more providers here
   ],

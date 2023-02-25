@@ -54,6 +54,7 @@ export default function Home({
       data: slideData["results"].slice(0, 4),
     },
   ];
+  
   console.log(slideData, MovieTabData, TVTabData, TvRecomment);
   const [selelectedTabMovie, SetselectedTabMovie] = React.useState({
     ...TabMovie[0],
@@ -106,127 +107,125 @@ export default function Home({
   return (
     <>
       <LayoutBasic>
-        <div className="min-h-[200vh] w-full">
-          <Slider slidedata={slideData["results"]} />
-          <WrapperGrid>
-            {/* Movie Tab Start */}
-            <div className="flex items-center mt-5">
-              <p className="text-4xl font-bold text-white">Movies</p>
-              <div className="flex items-center">
-                {TabMovie?.map((item: any, index: number) => {
-                  return (
-                    <>
-                      <div
-                        onClick={() => {
-                          HandleListTabMovie(item);
-                        }}
-                        className={
-                          `${
-                            item.title == selelectedTabMovie.title
-                              ? "border-[#EDB709] border-b-[4px]"
-                              : ""
-                          }` + " mx-3 hover:cursor-pointer "
-                        }
+        <Slider slidedata={slideData["results"]} />
+        <WrapperGrid>
+          {/* Movie Tab Start */}
+          <div className="flex items-center mt-5">
+            <p className="text-4xl font-bold text-white">Movies</p>
+            <div className="flex items-center">
+              {TabMovie?.map((item: any, index: number) => {
+                return (
+                  <>
+                    <div
+                      onClick={() => {
+                        HandleListTabMovie(item);
+                      }}
+                      className={
+                        `${
+                          item.title == selelectedTabMovie.title
+                            ? "border-[#EDB709] border-b-[4px]"
+                            : ""
+                        }` + " mx-3 hover:cursor-pointer "
+                      }
+                    >
+                      <p
+                        className={` text-lg ${
+                          item.title == selelectedTabMovie.title
+                            ? "text-white font-medium "
+                            : "text-slate-300 font-light"
+                        }   `}
                       >
-                        <p
-                          className={` text-lg ${
-                            item.title == selelectedTabMovie.title
-                              ? "text-white font-medium "
-                              : "text-slate-300 font-light"
-                          }   `}
-                        >
-                          {item?.title}
-                        </p>
-                      </div>
-                    </>
-                  );
-                })}
-              </div>
+                        {item?.title}
+                      </p>
+                    </div>
+                  </>
+                );
+              })}
             </div>
+          </div>
 
-            <div className="flex flex-wrap">
-              {isLoadingMovie ? (
-                <ListSkeleton />
-              ) : (
-                selelectedTabMovie.data?.map((item: MovieModel) => {
-                  return (
-                    <>
-                      <MovieItem item={item} />
-                    </>
-                  );
-                })
-              )}
+          <div className="flex flex-wrap">
+            {isLoadingMovie ? (
+              <ListSkeleton />
+            ) : (
+              selelectedTabMovie.data?.map((item: MovieModel) => {
+                return (
+                  <>
+                    <MovieItem item={item} />
+                  </>
+                );
+              })
+            )}
+          </div>
+
+          <Link href={`${selelectedTabMovie.href}?page=1`}>
+            <div className="text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-3xl">
+              <p className="font-medium text-lg py-3 my-3 text-white">
+                View All
+              </p>
             </div>
+          </Link>
+          {/* Movie Tab End */}
 
-            <Link href={`${selelectedTabMovie.href}?page=1`}>
-              <div className="text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-3xl">
-                <p className="font-medium text-lg py-3 my-3 text-white">
+          {/* TV Tab Start */}
+
+          <div className="flex items-center justify-between my-10">
+            <p className="text-4xl font-bold text-white">TV Shows</p>
+            <div className="flex  items-center">
+              {TabTv?.map((item: any, index: number) => {
+                return (
+                  <>
+                    <div
+                      onClick={() => {
+                        HandleListTabTB(item);
+                      }}
+                      className={
+                        `${
+                          item.title == selelectedTabTV.title
+                            ? "border-[#EDB709] border-b-[4px]"
+                            : ""
+                        }` + " mx-3 hover:cursor-pointer "
+                      }
+                    >
+                      <p
+                        className={` text-lg ${
+                          item.title == selelectedTabTV.title
+                            ? "text-white font-medium "
+                            : "text-[#265D95] font-light"
+                        }   `}
+                      >
+                        {item?.title}
+                      </p>
+                    </div>
+                  </>
+                );
+              })}
+            </div>
+            <Link href={`${selelectedTabTV.href}?page=1`} className="block">
+              <div className="min-w-[100px] text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-xl">
+                <p className=" font-medium text-xs py-1 px-3 my-3 text-white">
                   View All
                 </p>
               </div>
             </Link>
-            {/* Movie Tab End */}
+          </div>
 
-            {/* TV Tab Start */}
+          <div className="flex flex-wrap">
+            {isLoadingTV ? (
+              <ListSkeleton />
+            ) : (
+              selelectedTabTV.data?.map((item: TVModel, index: number) => {
+                return (
+                  <>
+                    <TVItem item={item} />
+                  </>
+                );
+              })
+            )}
+          </div>
 
-            <div className="flex items-center justify-between my-10">
-              <p className="text-4xl font-bold text-white">TV Shows</p>
-              <div className="flex  items-center">
-                {TabTv?.map((item: any, index: number) => {
-                  return (
-                    <>
-                      <div
-                        onClick={() => {
-                          HandleListTabTB(item);
-                        }}
-                        className={
-                          `${
-                            item.title == selelectedTabTV.title
-                              ? "border-[#EDB709] border-b-[4px]"
-                              : ""
-                          }` + " mx-3 hover:cursor-pointer "
-                        }
-                      >
-                        <p
-                          className={` text-lg ${
-                            item.title == selelectedTabTV.title
-                              ? "text-white font-medium "
-                              : "text-[#265D95] font-light"
-                          }   `}
-                        >
-                          {item?.title}
-                        </p>
-                      </div>
-                    </>
-                  );
-                })}
-              </div>
-              <Link href={`${selelectedTabTV.href}?page=1`} className="block">
-                <div className="min-w-[100px] text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-xl">
-                  <p className=" font-medium text-xs py-1 px-3 my-3 text-white">
-                    View All
-                  </p>
-                </div>
-              </Link>
-            </div>
-
-            <div className="flex flex-wrap">
-              {isLoadingTV ? (
-                <ListSkeleton />
-              ) : (
-                selelectedTabTV.data?.map((item: TVModel, index: number) => {
-                  return (
-                    <>
-                      <TVItem item={item} />
-                    </>
-                  );
-                })
-              )}
-            </div>
-
-            {/* TV Tab End */}
-          </WrapperGrid>
-        </div>
+          {/* TV Tab End */}
+        </WrapperGrid>
       </LayoutBasic>
     </>
   );

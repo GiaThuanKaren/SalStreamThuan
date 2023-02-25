@@ -28,6 +28,7 @@ function DetailTV() {
   React.useEffect(() => {
     async function FetchApi() {
       try {
+        console.log(router.query.idtv, "DEtail Movie");
         SetisLoading(true);
         let result = await GetDetailTV(router.query.idtv);
         console.log(result);
@@ -38,7 +39,9 @@ function DetailTV() {
         SetisLoading(false);
       }
     }
-    FetchApi();
+    if (router.query.idtv) {
+      FetchApi();
+    }
   }, [idtv]);
   console.log(properties);
 
