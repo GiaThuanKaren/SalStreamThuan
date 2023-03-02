@@ -2,6 +2,7 @@ import React from "react";
 import { ICON, IconRegular, IconSolid } from "src/utils/Icon";
 
 function CommentInput() {
+    
   return (
     <>
       <div className="relative my-10">

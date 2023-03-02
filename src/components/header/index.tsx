@@ -20,7 +20,7 @@ function Header() {
   const DrawerEle = useRef(null);
   React.useEffect(() => {
     window.addEventListener("scroll", (e) => {
-      console.log(window.scrollY);
+      // console.log(window.scrollY);
       if (Math.abs(window.scrollY) == 0) {
         setisTop(true);
       } else setisTop(false);

@@ -2,6 +2,7 @@ import CommentInput from "./CommentInput";
 import Footer from "./footer";
 import Header from "./header";
 import Image from "./Image";
+import ListComment from "./ListComment";
 import ListSkeleton from "./ListItemSkeleton";
 import ModelPopup from "./ModalPopUp";
 import MovieItem from "./MovieItem";
@@ -13,6 +14,7 @@ import Slider from "./slider";
 import TVItem from "./TVItem";
 import WrapperGrid from "./wrapper";
 export {
+  ListComment,
   CommentInput,
   SkeletonSideBar,
   ListSkeleton,

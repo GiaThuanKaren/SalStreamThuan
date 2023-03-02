@@ -1,6 +1,11 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { CommentInput, ModelPopup, WrapperGrid } from "src/components";
+import {
+  CommentInput,
+  ListComment,
+  ModelPopup,
+  WrapperGrid,
+} from "src/components";
 import { LayoutBasic, Mainlayout } from "src/Layout";
 import {
   DetailMovieModel,
@@ -114,7 +119,7 @@ function DetailMovie() {
         </div>
         <div className="flex min-h-0 mt-[30px]">
           <div className="basis-full md:basis-2/3 lg:basis-2/3 xl:basis-3/4 2xl:basis-4/5 h-full">
-            {isLoading ? (
+            {/* {isLoading ? (
               <div
                 role="status"
                 className="flex items-center justify-center h-56 w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700"
@@ -136,7 +141,7 @@ function DetailMovie() {
                 className="w-full h-[500px]"
                 src={`https://www.2embed.to/embed/tmdb/movie?id=${idmovie}`}
               ></iframe>
-            )}
+            )} */}
 
             <p className="text-white text-2xl mt-5">
               {properties?.MovieDetail.title}
@@ -165,7 +170,7 @@ function DetailMovie() {
                 {properties?.MovieDetail.overview}
               </p>
             </div>
-            <CommentInput />
+            <ListComment />
           </div>
 
           <div className="hidden md:block md:basis-1/3 lg-basis-1/3  xl:basis-1/4  2xl:basis-1/5 px-2">
