@@ -1,3 +1,4 @@
+import { ToastContainer, toast } from "react-toastify";
 export const TabMovie = [
   {
     title: "Latest",
@@ -35,3 +36,7 @@ export const TabTv = [
     href: "/tv/on_the_air",
   },
 ];
+
+export const ShowToastify = (message: string) => {
+  toast(message);
+};

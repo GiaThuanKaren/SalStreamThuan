@@ -11,6 +11,7 @@ interface Genre {
 }
 function Header() {
   const { data: session, status } = useSession();
+
   const { push, asPath } = useRouter();
   const [isTop, setisTop] = React.useState(false);
   const [isDrawerOpen, SetisDrawerOpen] = React.useState(false);
@@ -132,7 +133,7 @@ function Header() {
             isTop ? "" : "bg-black "
           }flex items-center justify-between  transition-all px-2  sm:px-0  `}
         >
-          <div 
+          <div
             onClick={() => {
               SetisDrawerOpen(true);
             }}
@@ -218,7 +219,7 @@ function Header() {
                   onClick={() => {
                     SetOpenNav(!isOpenNav);
                   }}
-                  className="relative"
+                  className="relative ml-3"
                 >
                   <img
                     className="w-10 h-10 rounded-full"

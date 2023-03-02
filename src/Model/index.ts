@@ -92,8 +92,6 @@ export interface DetailMovieModel {
   vote_count: number;
 }
 
-
-
 export interface Genre {
   id: number;
   name: string;
@@ -117,58 +115,71 @@ export interface SpokenLanguage {
 }
 
 export interface VideoMovieModel {
-  id: number
-  results: Result[]
+  id: number;
+  results: Result[];
 }
 
 export interface Result {
-  iso_639_1: string
-  iso_3166_1: string
-  name: string
-  key: string
-  site: string
-  size: number
-  type: string
-  official: boolean
-  published_at: string
-  id: string
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
 }
-
-
-
-
-
 
 export interface CreatedBy {
-  id: number
-  credit_id: string
-  name: string
-  gender: number
-  profile_path: string
+  id: number;
+  credit_id: string;
+  name: string;
+  gender: number;
+  profile_path: string;
 }
-
 
 export interface Network {
-  name: string
-  id: number
-  logo_path: string
-  origin_country: string 
+  name: string;
+  id: number;
+  logo_path: string;
+  origin_country: string;
 }
 
-
-
 export interface Season {
-  air_date: string
-  episode_count: number
-  id: number
-  name: string
-  overview: string
-  poster_path: string
-  season_number: number
+  air_date: string;
+  episode_count: number;
+  id: number;
+  name: string;
+  overview: string;
+  poster_path: string;
+  season_number: number;
 }
 
 export interface SpokenLanguage {
-  english_name: string
-  iso_639_1: string
-  name: string
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+}
+
+export interface Comment {
+  _id: string;
+  content: string;
+  parentCommentID: string;
+  postId: string;
+  authorId: string;
+  replies: any[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  user: User[];
+}
+
+export interface User {
+  _id: string;
+  name: string;
+  email: string;
+  image: string;
+  emailVerified: any;
 }

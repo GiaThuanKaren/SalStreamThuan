@@ -1,7 +1,9 @@
+import { ShowToastify } from "./../../utils/index";
 import { MovieModel } from "src/Model";
 import axios from "axios";
 const ApiKey: string = "api_key=bec721bcb126b9938b6c2f7b39448c63";
 const Base_Url: string = "https://api.themoviedb.org/3";
+const Base_url_dev: string = "http://192.168.1.5:5050";
 const ImageOption = {
   w500: "https://image.tmdb.org/t/p/w500",
   original: "https://image.tmdb.org/t/p/original",
@@ -149,5 +151,28 @@ export const GetDetailSeason = async function (IdTV: any, NumberSeaon: any) {
     };
   } catch (e) {
     throw e;
+  }
+};
+
+export const InsertNewComment = async function (
+  parentCommentID: string = "",
+  content: string = "",
+  postID: string,
+  idUserComment: string
+) {
+  try {
+    await axios.post(`${Base_url_dev}/api/comment/insert_new`, {
+      parentCommentID,
+      content,
+      postID,
+      idUserComment,
+    });
+    ShowToastify("Thank you to your feedback");
+  } catch (error) {
+    console.log(error);
+    ShowToastify(
+      "Oops , Something went wrong , please try again or refresh this page !!!!"
+    );
+    throw error;
   }
 };
