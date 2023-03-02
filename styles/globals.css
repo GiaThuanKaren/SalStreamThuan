@@ -18,16 +18,18 @@ a {
   box-sizing: border-box;
 }
 
-
-
-
 @media (prefers-color-scheme: dark) {
   html {
-    
+    color: rgb(0, 0, 0);
+    background: #080f28;
   }
   body {
     color: rgb(0, 0, 0);
-    background: #080F28;
+    background: #080f28;
+  }
+  a {
+    display: block;
+    text-decoration: none;
   }
 }
 .bg-slider {

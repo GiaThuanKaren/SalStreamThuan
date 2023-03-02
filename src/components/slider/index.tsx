@@ -25,7 +25,7 @@ function Slider({ slidedata = [] }: Props) {
         }}
         navigation={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper h-[450px]"
+        className="mySwiper h-fit"
       >
         {slidedata?.map((item: MovieModel, index) => {
           return (
@@ -73,7 +73,7 @@ function Slider({ slidedata = [] }: Props) {
                     </div>
 
                     <div className="mt-5">
-                      <p className="text-white text-xl h-40  overflow-y-auto text-overflow-ellipsis">
+                      <p className="text-white text-xl h-20  overflow-y-hidden text-overflow-ellipsis">
                         {item["overview"]}
                       </p>
                       <Link href={`/movie/detail/${item.id}`} className="mt-3 block">

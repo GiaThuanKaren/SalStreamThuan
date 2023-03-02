@@ -37,7 +37,7 @@ function Header() {
 
   return (
     <>
-      <div className=" flex items-center justify-center xl:mx-[200px] z-[2] fixed top-0 left-0 right-0 ">
+      <div className="h-fit  flex items-center justify-center xl:mx-[200px] px-2 z-[2] fixed top-0 left-0 right-0 ">
         {isDrawerOpen && (
           <div
             // ref={DrawerEle}
@@ -128,9 +128,9 @@ function Header() {
           </div>
         )}
         <div
-          className={`w-full min-h-[50px] ${
+          className={`w-full  ${
             isTop ? "" : "bg-black "
-          }flex items-center justify-between transition-all px-2 py-3 sm:px-0 py-3iS `}
+          }flex items-center justify-between  transition-all px-2  sm:px-0  `}
         >
           <div 
             onClick={() => {

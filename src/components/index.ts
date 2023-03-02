@@ -1,3 +1,4 @@
+import CommentInput from "./CommentInput";
 import Footer from "./footer";
 import Header from "./header";
 import Image from "./Image";
@@ -11,8 +12,8 @@ import SkeletonSideBar from "./SkeletonSideBar";
 import Slider from "./slider";
 import TVItem from "./TVItem";
 import WrapperGrid from "./wrapper";
-
 export {
+  CommentInput,
   SkeletonSideBar,
   ListSkeleton,
   Skeleton,

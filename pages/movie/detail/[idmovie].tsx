@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { ModelPopup, WrapperGrid } from "src/components";
+import { CommentInput, ModelPopup, WrapperGrid } from "src/components";
 import { LayoutBasic, Mainlayout } from "src/Layout";
 import {
   DetailMovieModel,
@@ -165,6 +165,7 @@ function DetailMovie() {
                 {properties?.MovieDetail.overview}
               </p>
             </div>
+            <CommentInput />
           </div>
 
           <div className="hidden md:block md:basis-1/3 lg-basis-1/3  xl:basis-1/4  2xl:basis-1/5 px-2">
