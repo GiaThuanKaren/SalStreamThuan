@@ -15,11 +15,12 @@
 - ## Feature 🐥
   - [x] Can Watch Movie /TV Shows
   - [x] Responsive on mobile/tablet
+  - [x] Coment Movie/TV
   - [ ] Login With Social 
     - [x] Google
     - [ ] Facebook
     - [ ] Github
-  - [ ] Coment Movie/TV
+  
   - [ ] Push nofication when user comment 
    
 
