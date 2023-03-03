@@ -1,6 +1,8 @@
+import moment from "moment";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Comment } from "src/Model";
 import { GetALlComment } from "src/services/api";
 import { ShowToastify } from "src/utils";
@@ -44,8 +46,17 @@ const ReplyCommentComp: FC<{ dataComment: Comment }> = function ({
     <>
       <div className="hover:cursor-pointer my-3">
         <div className="flex ">
+          <div className="h-10 w-10 rounded-full overflow-hidden mr-5 mt-1 mb-3">
+            <LazyLoadImage
+              className="h-full w-full object-cover"
+              src={dataComment.user[0].image}
+            />
+          </div>
           <div>
             <p className="text-white font-medium">{dataComment?.content} </p>
+            <p className="text-white text-xs font-light">{
+              moment(dataComment.updatedAt).format("MMM D YY")
+            }</p>
           </div>
         </div>
         <div className="flex items-center">

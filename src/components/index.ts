@@ -11,9 +11,12 @@ import SearchBar from "./search";
 import Skeleton from "./SkeletonItem";
 import SkeletonSideBar from "./SkeletonSideBar";
 import Slider from "./slider";
+import Spinner from "./Spinner";
 import TVItem from "./TVItem";
 import WrapperGrid from "./wrapper";
+
 export {
+  Spinner,
   ListComment,
   CommentInput,
   SkeletonSideBar,
