@@ -4,7 +4,7 @@ import React from "react";
 function Footer() {
   return (
     <>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center my-3">
         <div className="h-[300px] w-full flex justify-between text-white">
           <div className="flex ">
             <p className="font-medium">Privacy</p>

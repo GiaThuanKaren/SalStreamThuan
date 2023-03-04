@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
+import { ListComment } from "src/components";
 import { LayoutBasic } from "src/Layout";
 import { DetailSeaon, Episode } from "src/Model/tv";
 import { GetDetailSeason } from "src/services/api";
@@ -10,7 +11,6 @@ function DetailSeason() {
   const { id, season } = router.query;
   const [dataEpisode, SetdataEpisode] = React.useState<Episode[]>();
   const [episode, Setepisode] = React.useState<number>(1);
-
   const [isLoading, SetisLoading] = React.useState(false);
   const [isOpenTrailer, SetisOpenTrailer] = React.useState(false);
   React.useEffect(() => {
@@ -92,6 +92,8 @@ function DetailSeason() {
           </div>
           {/* <div className="hidden md:block md:basis-1/3 lg-basis-1/3  xl:basis-1/4  2xl:basis-1/5 px-2"></div> */}
         </div>
+        <ListComment />
+       
       </LayoutBasic>
     </>
   );
@@ -101,9 +103,9 @@ export default DetailSeason;
 
 export const getServerSideProps: GetServerSideProps = async function ({
   query,
-  params
+  params,
 }) {
-  console.log(query,params,"Query From Server Side");
+  console.log(query, params, "Query From Server Side");
   return {
     props: {},
   };

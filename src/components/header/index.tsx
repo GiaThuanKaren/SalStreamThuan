@@ -42,11 +42,11 @@ function Header() {
 
   return (
     <>
-      <div className="h-fit  flex items-center justify-center xl:mx-[200px] px-2 z-[2] fixed top-0 left-0 right-0 ">
+      <div className="h-fit  flex items-center justify-center xl:mx-[200px]  z-[2] fixed top-0 left-0 right-0 ">
         {isDrawerOpen && (
           <div
             // ref={DrawerEle}
-            className="min-h-screen flex justify-between bg-[#1E2747]   z-[3]  absolute left-0 top-0 bottom-0 right-0"
+            className="min-h-screen flex justify-between bg-[#1E2747]   z-[3]  absolute left-0 top-0 bottom-0 right-0 "
           >
             <div className="min-w-[100px] h-full  px-2 py-1  ">
               <Link href={"/"}>
@@ -76,7 +76,7 @@ function Header() {
                   SetIsOpengenre(false);
                 }}
                 href={""}
-                className="hover:text-blue-400 text-black mx-3"
+                className="hover:text-blue-400 text-white  mx-3"
               >
                 <div className="relative">
                   <p>Genre</p>
@@ -135,7 +135,7 @@ function Header() {
         <div
           className={`w-full  ${
             isTop ? "" : "bg-black "
-          }flex items-center justify-between  transition-all px-2  sm:px-0  `}
+          }flex items-center justify-between  transition-all px-5  sm:px-0  `}
         >
           <div
             onClick={() => {

@@ -20,13 +20,13 @@ const ReplyCommentComp: FC<{ dataComment: Comment }> = function ({
   const [openReplyInput, setopenReplyInput] = React.useState(false);
   const [ArrCommentReply, setArrCommentReply] = React.useState<Comment[]>([]);
   const router = useRouter();
-  const { idmovie } = router.query;
-  const [idPost, SetidPost] = React.useState(idmovie as string);
+  const { id } = router.query;
+  const [idPost, SetidPost] = React.useState(id as string);
 
   const HandleLoadMoreComment = async function (parentID: string) {
     if (parentID && parentID.trim() != "") {
       try {
-        let result = await GetALlComment(idmovie as string, parentID);
+        let result = await GetALlComment(id as string, parentID);
         console.log(result, "More Comment Incomming");
         setArrCommentReply(result.data);
         setopenReplyComment(true);
@@ -39,7 +39,7 @@ const ReplyCommentComp: FC<{ dataComment: Comment }> = function ({
   };
 
   React.useEffect(() => {
-    SetidPost(idmovie as string);
+    SetidPost(id as string);
   }, []);
 
   return (
@@ -54,9 +54,9 @@ const ReplyCommentComp: FC<{ dataComment: Comment }> = function ({
           </div>
           <div>
             <p className="text-white font-medium">{dataComment?.content} </p>
-            <p className="text-white text-xs font-light">{
-              moment(dataComment.updatedAt).format("MMM D YY")
-            }</p>
+            <p className="text-white text-xs font-light">
+              {moment(dataComment.updatedAt).format("MMM D YY")}
+            </p>
           </div>
         </div>
         <div className="flex items-center">
@@ -71,7 +71,7 @@ const ReplyCommentComp: FC<{ dataComment: Comment }> = function ({
         </div>
 
         {openReplyInput && (
-          <CommentInput idPost={idmovie as string} parentID={dataComment._id} />
+          <CommentInput idPost={id as string} parentID={dataComment._id} />
         )}
 
         {/* <p
@@ -87,6 +87,7 @@ const ReplyCommentComp: FC<{ dataComment: Comment }> = function ({
           <p
             onClick={() => {
               setopenReplyComment(false);
+              
               HandleLoadMoreComment(dataComment._id);
             }}
             className="font-medium text-white text-xs"
@@ -113,69 +114,13 @@ const ReplyCommentComp: FC<{ dataComment: Comment }> = function ({
 
 function ListComment() {
   const router = useRouter();
-  const { idmovie } = router.query;
+  const { id } = router.query;
   const [ArrComment, setArrComment] = React.useState<Comment[]>([]);
-  console.log("id Post comment ", idmovie);
-  let dataCmt: ReplyComment[] = [
-    {
-      msg: "First Comment",
-      reply: [
-        {
-          msg: "Reply First Comment",
-          reply: [
-            {
-              msg: "Reply reply first comment",
-              reply: [
-                {
-                  msg: "Reply 3th comment",
-                  reply: [
-                    {
-                      msg: "Reply 4th comment",
-                      reply: [
-                        {
-                          msg: "Reply 5th comment",
-                          reply: [],
-                        },
-                        {
-                          msg: "Reply 5th comment",
-                          reply: [],
-                        },
-                        {
-                          msg: "Reply 5th comment",
-                          reply: [],
-                        },
-                        {
-                          msg: "Reply 5th comment",
-                          reply: [],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      msg: "Second Comment",
-      reply: [
-        {
-          msg: "Reply Second Comment",
-          reply: [
-            {
-              msg: "Reply reply comment",
-              reply: [],
-            },
-          ],
-        },
-      ],
-    },
-  ];
+  console.log("id Post comment ", id);
+
   async function FetchApi(parentId: string = "") {
     try {
-      let result = await GetALlComment(idmovie as string, parentId);
+      let result = await GetALlComment(id as string, parentId);
       console.log(result.data, "ALl Parent Comment");
       setArrComment(result.data);
     } catch (error) {
@@ -183,14 +128,14 @@ function ListComment() {
     }
   }
   React.useEffect(() => {
-    if (idmovie) {
+    if (id) {
       FetchApi();
     }
-  }, [idmovie]);
+  }, [id]);
   return (
     <>
       <h3 className="text-white font-medium"></h3>
-      <CommentInput idPost={idmovie as string} haveMargin />
+      <CommentInput idPost={id as string} haveMargin />
       {ArrComment.map((item: Comment, index: number) => {
         console.log(item, "Item Comment Parent");
         return (

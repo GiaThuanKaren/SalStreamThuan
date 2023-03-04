@@ -26,16 +26,16 @@ interface InfoDetailMovieModel {
 interface DetailMovieResult {}
 function DetailMovie() {
   const router = useRouter();
-  const { idmovie } = router.query;
+  const { id } = router.query;
   const [isLoading, SetisLoading] = React.useState(false);
   const [isOpenTrailer, SetisOpenTrailer] = React.useState(false);
   const [properties, Setproperties] = React.useState<InfoDetailMovieModel>();
   React.useEffect(() => {
     async function FetchApi() {
       try {
-        console.log(router.query.idmovie, "DEtail Movie");
+        console.log(router.query.id, "DEtail Movie");
         SetisLoading(true);
-        let result = await GetDetailMovie(router.query.idmovie);
+        let result = await GetDetailMovie(router.query.id);
         console.log(result);
         Setproperties(result);
         SetisLoading(false);
@@ -44,10 +44,10 @@ function DetailMovie() {
         throw e;
       }
     }
-    if (router.query.idmovie) {
+    if (router.query.id) {
       FetchApi();
     }
-  }, [idmovie]);
+  }, [id]);
   console.log(properties);
 
   return (
@@ -119,7 +119,7 @@ function DetailMovie() {
         </div>
         <div className="flex min-h-0 mt-[30px]">
           <div className="basis-full md:basis-2/3 lg:basis-2/3 xl:basis-3/4 2xl:basis-4/5 h-full">
-            {/* {isLoading ? (
+            {isLoading ? (
               <div
                 role="status"
                 className="flex items-center justify-center h-56 w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700"
@@ -139,9 +139,9 @@ function DetailMovie() {
               <iframe
                 allowFullScreen
                 className="w-full h-[500px]"
-                src={`https://www.2embed.to/embed/tmdb/movie?id=${idmovie}`}
+                src={`https://www.2embed.to/embed/tmdb/movie?id=${id}`}
               ></iframe>
-            )} */}
+            )}
 
             <p className="text-white text-2xl mt-5">
               {properties?.MovieDetail.title}
