@@ -64,7 +64,7 @@ function SeriesPage({
           <p className="text-lg whitespace-nowrap md:text-4xl font-bold text-white my-3">
             TV Shows
           </p>
-          <div className="flex  items-center w-full  ">
+          <div className="flex  items-center w-full flex-wrap  ">
             {TabTv?.map((item: any, index: number) => {
               return (
                 <>
@@ -81,7 +81,7 @@ function SeriesPage({
                     }
                   >
                     <p
-                      className={` text-base whitespace-nowrap md:text-lg ${
+                      className={`my-2 text-base whitespace-nowrap md:text-lg ${
                         item.title == selelectedTabTV.title
                           ? "text-white font-medium "
                           : "text-[#265D95] font-light"

@@ -63,10 +63,10 @@ function MoviePage({
       <LayoutBasic>
         <WrapperGrid>
           <div className="flex flex-wrap items-center mt-5">
-            <p className="text-lg whitespace-nowrap md:text-4xl font-bold text-white">
+            <p className="text-lg whitespace-nowrap md:text-4xl mx-3 font-bold text-white">
               Movies
             </p>
-            <div className="flex items-center">
+            <div className="flex items-center  flex-wrap ">
               {TabMovie?.map((item: any, index: number) => {
                 return (
                   <>
@@ -79,11 +79,11 @@ function MoviePage({
                           item.title == selelectedTabMovie.title
                             ? "border-[#EDB709] border-b-[4px]"
                             : ""
-                        }` + " mx-3 hover:cursor-pointer "
+                        }` + "  hover:cursor-pointer "
                       }
                     >
                       <p
-                        className={` text-base whitespace-nowrap md:text-lg ${
+                        className={`mr-3 ml-1 my-2 text-base whitespace-nowrap md:text-lg ${
                           item.title == selelectedTabMovie.title
                             ? "text-white font-medium "
                             : "text-[#265D95] font-light"

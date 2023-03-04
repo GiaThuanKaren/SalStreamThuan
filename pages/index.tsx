@@ -54,7 +54,7 @@ export default function Home({
       data: slideData["results"].slice(0, 4),
     },
   ];
-  
+
   console.log(slideData, MovieTabData, TVTabData, TvRecomment);
   const [selelectedTabMovie, SetselectedTabMovie] = React.useState({
     ...TabMovie[0],
@@ -110,9 +110,11 @@ export default function Home({
         <Slider slidedata={slideData["results"]} />
         <WrapperGrid>
           {/* Movie Tab Start */}
-          <div className="flex items-center mt-5">
-            <p className="text-4xl font-bold text-white">Movies</p>
-            <div className="flex items-center">
+          <div className="flex flex-wrap items-center mt-5">
+            <p className="text-lg whitespace-nowrap md:text-4xl mx-3 font-bold text-white">
+              Movies
+            </p>
+            <div className="flex items-center  flex-wrap ">
               {TabMovie?.map((item: any, index: number) => {
                 return (
                   <>
@@ -125,14 +127,14 @@ export default function Home({
                           item.title == selelectedTabMovie.title
                             ? "border-[#EDB709] border-b-[4px]"
                             : ""
-                        }` + " mx-3 hover:cursor-pointer "
+                        }` + "  hover:cursor-pointer "
                       }
                     >
                       <p
-                        className={` text-lg ${
+                        className={`mr-3 ml-1 my-2 text-base whitespace-nowrap md:text-lg ${
                           item.title == selelectedTabMovie.title
                             ? "text-white font-medium "
-                            : "text-slate-300 font-light"
+                            : "text-[#265D95] font-light"
                         }   `}
                       >
                         {item?.title}
@@ -169,9 +171,11 @@ export default function Home({
 
           {/* TV Tab Start */}
 
-          <div className="flex items-center justify-between my-10">
-            <p className="text-4xl font-bold text-white">TV Shows</p>
-            <div className="flex  items-center">
+          <div className="flex items-center justify-between my-10 flex-wrap">
+            <p className="text-lg whitespace-nowrap md:text-4xl font-bold text-white my-3">
+              TV Shows
+            </p>
+            <div className="flex  items-center w-full flex-wrap  ">
               {TabTv?.map((item: any, index: number) => {
                 return (
                   <>
@@ -184,11 +188,11 @@ export default function Home({
                           item.title == selelectedTabTV.title
                             ? "border-[#EDB709] border-b-[4px]"
                             : ""
-                        }` + " mx-3 hover:cursor-pointer "
+                        }` + "  hover:cursor-pointer "
                       }
                     >
                       <p
-                        className={` text-lg ${
+                        className={`mr-3 ml-1 my-2 text-base whitespace-nowrap md:text-lg ${
                           item.title == selelectedTabTV.title
                             ? "text-white font-medium "
                             : "text-[#265D95] font-light"
@@ -201,13 +205,16 @@ export default function Home({
                 );
               })}
             </div>
-            <Link href={`${selelectedTabTV.href}?page=1`} className="block">
-              <div className="min-w-[100px] text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-xl">
-                <p className=" font-medium text-xs py-1 px-3 my-3 text-white">
-                  View All
-                </p>
-              </div>
+            {/* <div className="hidden md:block min-w-[100px] text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-xl">
+            <Link
+              href={`${selelectedTabTV.href}?page=1`}
+              className="block text-white"
+            >
+              <p className=" font-medium text-xs py-1 px-3 my-3 text-white">
+                View All
+              </p>
             </Link>
+          </div> */}
           </div>
 
           <div className="flex flex-wrap">

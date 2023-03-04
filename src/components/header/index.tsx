@@ -4,14 +4,15 @@ import { GetMoveOrTvByParam } from "src/services/api";
 import { ICON, IconSolid } from "src/utils/Icon";
 import { signOut, useSession } from "next-auth/react";
 import SearchBar from "../search";
+import messaging from "firebase/messaging";
 import { useRouter } from "next/router";
+import app from "src/utils/lib/firebase";
 interface Genre {
   name: string;
   id: number;
 }
 function Header() {
   const { data: session, status } = useSession();
-
   const { push, asPath } = useRouter();
   const [isTop, setisTop] = React.useState(false);
   const [isDrawerOpen, SetisDrawerOpen] = React.useState(false);
@@ -33,6 +34,9 @@ function Header() {
         Setgenre(result.genres);
       } catch (e) {}
     }
+    // messaging.getToken(app).then((token: string) => {
+    //   console.log("Toke");
+    // });
     FetchApi();
   }, []);
 
@@ -42,23 +46,23 @@ function Header() {
         {isDrawerOpen && (
           <div
             // ref={DrawerEle}
-            className="min-h-screen flex justify-between  z-[3]  absolute left-0 top-0 bottom-0 right-0"
+            className="min-h-screen flex justify-between bg-[#1E2747]   z-[3]  absolute left-0 top-0 bottom-0 right-0"
           >
-            <div className="min-w-[100px] h-full bg-slate-300 px-2 py-1  ">
+            <div className="min-w-[100px] h-full  px-2 py-1  ">
               <Link href={"/"}>
-                <p className="hover:text-blue-400 text-black font-medium">
+                <p className="hover:text-blue-400 text-white my-2 font-medium">
                   Home
                 </p>
               </Link>
               <Link
                 href={"/movie"}
-                className="hover:text-blue-400 text-black mx-3"
+                className="hover:text-blue-400 text-white my-2 mx-3"
               >
                 <p>Movies</p>
               </Link>
               <Link
                 href={"/tv"}
-                className="hover:text-blue-400 text-black mx-3"
+                className="hover:text-blue-400 text-white my-2 mx-3"
               >
                 <p>TV Shows</p>
               </Link>
@@ -86,7 +90,7 @@ function Header() {
                               .toLowerCase()
                               .replace(/\s/g, "")}/${item.id}?page=1`}
                           >
-                            <li className="px-3 py-2 text-black  transition-all hover:text-[#075AB9] hover:bg-[rgb(21,27,50)]">
+                            <li className="px-3 py-2 text-white  transition-all hover:text-[#075AB9] hover:bg-[rgb(21,27,50)]">
                               <p className="whitespace-normal text-xs">
                                 {item.name}
                               </p>
@@ -104,7 +108,7 @@ function Header() {
                               .toLowerCase()
                               .replace(/\s/g, "")}/${item.id}?page=1  `}
                           >
-                            <li className="px-3 py-2 transition-all text-black hover:text-[#075AB9] hover:bg-[rgb(21,27,50)]">
+                            <li className="px-3 py-2 transition-all text-white hover:text-[#075AB9] hover:bg-[rgb(21,27,50)]">
                               <p className="whitespace-normal text-xs">
                                 {item.name}
                               </p>
