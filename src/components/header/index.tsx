@@ -120,9 +120,7 @@ function Header() {
                   </div>
                 </div>
               </Link>
-              <Link href={""} className="flex hover:text-blue-400 mx-3">
-                <p>Language</p>
-              </Link>
+            
             </div>
             <div
               onClick={() => {
@@ -211,9 +209,7 @@ function Header() {
                 )}
               </div>
             </Link>
-            <Link href={""} className="flex hover:text-blue-400 mx-3">
-              <p>Language</p>
-            </Link>
+         
           </div>
           <div className="flex items-center justify-between">
             <SearchBar />

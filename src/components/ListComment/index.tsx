@@ -23,13 +23,20 @@ const ReplyCommentComp: FC<{ dataComment: Comment }> = function ({
   const { id } = router.query;
   const [idPost, SetidPost] = React.useState(id as string);
 
-  const HandleLoadMoreComment = async function (parentID: string) {
+  const HandleLoadMoreComment = async function (
+    parentID: string,
+    Currstate: boolean
+  ) {
     if (parentID && parentID.trim() != "") {
       try {
-        let result = await GetALlComment(id as string, parentID);
-        console.log(result, "More Comment Incomming");
-        setArrCommentReply(result.data);
-        setopenReplyComment(true);
+        if (Currstate) {
+          setopenReplyComment(false);
+        } else {
+          let result = await GetALlComment(id as string, parentID);
+          console.log(result, "More Comment Incomming");
+          setArrCommentReply(result.data);
+          setopenReplyComment(true);
+        }
       } catch (error) {
         throw error;
       }
@@ -86,9 +93,7 @@ const ReplyCommentComp: FC<{ dataComment: Comment }> = function ({
         {dataComment.replies && dataComment.replies.length > 0 && (
           <p
             onClick={() => {
-              setopenReplyComment(false);
-              
-              HandleLoadMoreComment(dataComment._id);
+              HandleLoadMoreComment(dataComment._id, openReplyComment);
             }}
             className="font-medium text-white text-xs"
           >
