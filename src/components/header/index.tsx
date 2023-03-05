@@ -66,7 +66,7 @@ function Header() {
               >
                 <p>TV Shows</p>
               </Link>
-              <Link
+              <div
                 onMouseEnter={() => {
                   console.log("Enter Mouse");
                   SetIsOpengenre(true);
@@ -75,11 +75,11 @@ function Header() {
                   console.log("Out");
                   SetIsOpengenre(false);
                 }}
-                href={""}
+                
                 className="hover:text-blue-400 text-white  mx-3"
               >
-                <div className="relative">
-                  <p>Genre</p>
+                <div className="relative ">
+                  <p className="text-white">Genre</p>
                   <div className="shadow-lg text-white  bg-[#1E2747] flex justify-between p-2">
                     <ul>
                       {genre.slice(0, 10).map((item: Genre, index: number) => {
@@ -119,8 +119,7 @@ function Header() {
                     </ul>
                   </div>
                 </div>
-              </Link>
-            
+              </div>
             </div>
             <div
               onClick={() => {
@@ -153,7 +152,7 @@ function Header() {
             <Link href={"/tv"} className="hover:text-blue-400 mx-3">
               <p>TV Shows</p>
             </Link>
-            <Link
+            <div
               onMouseEnter={() => {
                 console.log("Enter Mouse");
                 SetIsOpengenre(true);
@@ -162,11 +161,11 @@ function Header() {
                 console.log("Out");
                 SetIsOpengenre(false);
               }}
-              href={""}
+              
               className="hover:text-blue-400 mx-3"
             >
               <div className="relative">
-                <p>Genre</p>
+                <p className="text-white">Genre</p>
                 {isOpengenre && (
                   <div className="shadow-lg text-white absolute top-full bg-[#1E2747] flex justify-between p-2">
                     <ul>
@@ -208,8 +207,7 @@ function Header() {
                   </div>
                 )}
               </div>
-            </Link>
-         
+            </div>
           </div>
           <div className="flex items-center justify-between">
             <SearchBar />
