@@ -26,7 +26,7 @@ function SearchBar() {
   }, [textSearchState]);
   return (
     <>
-      <div className="relative">
+      <div className="relative  ">
         <div className="flex items-center text-white rounded-2xl border-[1px] px-2 py-1">
           <input
             onKeyDown={(e) => {

@@ -245,7 +245,7 @@ function Header() {
               </>
             ) : (
               <Link href={`/signin`}>
-                <p className="text-white  font-medium ml-3">Sign In</p>
+                <p className="text-xs sm:text-base text-white  font-medium ml-3 whitespace-nowrap">Sign In</p>
               </Link>
             )}
           </div>
