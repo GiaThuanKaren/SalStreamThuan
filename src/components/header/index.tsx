@@ -134,7 +134,7 @@ function Header() {
         <div
           className={`w-full  ${
             isTop ? "" : "bg-black "
-          }flex items-center justify-between  transition-all px-5  sm:px-0  `}
+          }flex items-center justify-between  transition-all px-1  sm:px-0  `}
         >
           <div
             onClick={() => {
@@ -228,7 +228,14 @@ function Header() {
                     alt="Rounded avatar"
                   ></img>
                   {isOpenNav && (
-                    <ul className="absolute top-[calc(100%_+_10px)] bg-white min-h-[30px] right-0 ">
+                    <ul className="hover:cursor-pointer  list-none shadow-md rounded-md  w-screen  sm:w-[250px] bg-white absolute z-[1] top-[calc(100%_+_10px)] right-0 px-2 py-1">
+                      <li className="p-2 border-b-[2px] border-[#D4D4D4]">
+                        <h3 className="font-medium text-sm whitespace-nowrap">
+                          {session.user?.name as string}
+                        </h3>
+                      </li>
+                      <li className="p-2">Profle</li>
+
                       <li
                         onClick={async () => {
                           await signOut({
@@ -236,11 +243,9 @@ function Header() {
                             callbackUrl: "/",
                           });
                         }}
-                        className="h-5 px-3  block"
+                        className="p-2 border-t-[2px] border-[#D4D4D4]"
                       >
-                        <p className="font-medium text-xs whitespace-nowrap">
-                          Sign Out
-                        </p>
+                        Sign Out
                       </li>
                     </ul>
                   )}
