@@ -88,7 +88,11 @@ export async function watchCollectionChange(
     console.log(err);
   }
 }
-watchCollectionChange("", "comments", () => {
-  ShowToastify("DatabaseChange");
-});
+
+export async function RetriveUserInfo() {
+  try {
+    
+  } catch (e) {}
+}
+
 export default clientPromise;

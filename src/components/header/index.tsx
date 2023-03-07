@@ -42,13 +42,16 @@ function Header() {
 
   return (
     <>
-      <div className="h-fit  flex items-center justify-center xl:mx-[200px]  z-[2] fixed top-0 left-0 right-0 ">
+      <div className="h-16 bg-black  flex items-center justify-center xl:mx-[200px]  z-[2] fixed top-0 left-0 right-0 ">
         {isDrawerOpen && (
           <div
             // ref={DrawerEle}
             className="min-h-screen flex justify-between bg-[#1E2747]   z-[3]  absolute left-0 top-0 bottom-0 right-0 "
           >
             <div className="min-w-[100px] h-full  px-2 py-1  ">
+              <div className="md:hidden block">
+                <SearchBar />
+              </div>
               <Link href={"/"}>
                 <p className="hover:text-blue-400 text-white my-2 font-medium">
                   Home
@@ -75,7 +78,6 @@ function Header() {
                   console.log("Out");
                   SetIsOpengenre(false);
                 }}
-                
                 className="hover:text-blue-400 text-white  mx-3"
               >
                 <div className="relative ">
@@ -161,7 +163,6 @@ function Header() {
                 console.log("Out");
                 SetIsOpengenre(false);
               }}
-              
               className="hover:text-blue-400 mx-3"
             >
               <div className="relative">
@@ -210,7 +211,9 @@ function Header() {
             </div>
           </div>
           <div className="flex items-center justify-between">
-            <SearchBar />
+            <div className="hidden md:block">
+              <SearchBar />
+            </div>
             {status === "authenticated" ? (
               <>
                 <div
@@ -245,7 +248,9 @@ function Header() {
               </>
             ) : (
               <Link href={`/signin`}>
-                <p className="text-xs sm:text-base text-white  font-medium ml-3 whitespace-nowrap">Sign In</p>
+                <p className="text-xs sm:text-base text-white  font-medium ml-3 whitespace-nowrap">
+                  Sign In
+                </p>
               </Link>
             )}
           </div>

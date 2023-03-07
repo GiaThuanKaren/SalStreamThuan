@@ -23,8 +23,8 @@ function Slider({ slidedata = [] }: Props) {
         pagination={{
           clickable: true,
         }}
-        navigation={true}
         modules={[Pagination, Navigation]}
+        
         className="mySwiper h-fit"
       >
         {slidedata?.map((item: MovieModel, index) => {
@@ -53,7 +53,7 @@ function Slider({ slidedata = [] }: Props) {
                   </div>
                   <div className=" absolute w-[80%] ">
                     <div className="flex items-center">
-                      <p className="font-bold text-3xl text-white mr-3 ">
+                      <p className=" font-bold text-base md:text-3xl text-white mr-3 ">
                         {item["title"]}
                       </p>
                       <p className="text-center px-2 py-1 bg-[#EDB709] text-black rounded-2xl text-xs font-medium">
@@ -73,13 +73,13 @@ function Slider({ slidedata = [] }: Props) {
                     </div>
 
                     <div className="mt-5">
-                      <p className="text-white text-xl h-20  overflow-y-hidden text-overflow-ellipsis">
+                      <p className="hidden md:block text-white text-xl h-20  overflow-y-hidden text-overflow-ellipsis">
                         {item["overview"]}
                       </p>
                       <Link href={`/movie/detail/${item.id}`} className="mt-3 block">
                         <div className="flex items-center bg-[#007AFF] w-max px-3 py-1 rounded-2xl">
                           <ICON icon={IconSolid.faPlay} />
-                          <p className="text-white ml-3">Watch Movie</p>
+                          <p className="text-base md:text-sm text-white ml-3">Watch Movie</p>
                         </div>
                       </Link>
                     </div>
