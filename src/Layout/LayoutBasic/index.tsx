@@ -5,8 +5,7 @@ interface Props {
   children?: any;
 }
 function LayoutBasic({ children }: Props) {
-  const { tokenFCM } = useToken();
-  console.log("TOKEN in Here", tokenFCM);
+ 
   return (
     <>
       <Header />

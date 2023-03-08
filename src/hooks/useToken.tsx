@@ -1,11 +1,25 @@
+import { Messaging } from "firebase-admin/lib/messaging/messaging";
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken } from "firebase/messaging";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import React from "react";
+
 import { firebaseConfig } from "src/utils/lib/firebase";
-
+interface StateUseToken {
+  tokenFCM: string;
+  messaging: any;
+}
 function useToken() {
-  const [tokenFCM, setTokenFCM] = React.useState<string>("");
-
+  const [tokenFCM, setTokenFCM] = React.useState<StateUseToken>();
+  const HandleMessageIncoming = async function (messageVar: any) {
+    try {
+      onMessage(messageVar, (payload) => {
+        console.log("Message received. ", payload);
+        // ...
+      });
+    } catch (error) {
+      throw error;
+    }
+  };
   React.useEffect(() => {
     const app = initializeApp(firebaseConfig);
 
@@ -19,8 +33,14 @@ function useToken() {
           .then((currentToken) => {
             if (currentToken) {
               console.log("TOKEN", currentToken);
-              alert(currentToken);
-              setTokenFCM(currentToken);
+              onMessage(messaging, (payload) => {
+                console.log("Message received. ", payload);
+                // ...
+              });
+              setTokenFCM({
+                tokenFCM: currentToken,
+                messaging: messaging,
+              });
               // Send the token to your server and update the UI if necessary
               // ...
             } else {
@@ -40,7 +60,8 @@ function useToken() {
       }
     });
   }, []);
-  return { tokenFCM };
+
+  return { tokenFCM, HandleMessageIncoming };
 }
 
 export default useToken;
