@@ -1,6 +1,9 @@
+import { getToken } from "firebase/messaging";
 import React from "react";
+import { useToken } from "src/hooks";
 import { MovieModel } from "src/Model";
 import { JsxElement } from "typescript";
+
 import { Footer, Header } from "../../components";
 interface Props {
   children?: any;
@@ -9,6 +12,7 @@ interface Props {
   slideData?: any;
 }
 function Mainlayout({ children }: Props) {
+ 
   // return <></>;
   return (
     <>

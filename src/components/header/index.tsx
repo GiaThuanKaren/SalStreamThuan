@@ -6,7 +6,6 @@ import { signOut, useSession } from "next-auth/react";
 import SearchBar from "../search";
 import messaging from "firebase/messaging";
 import { useRouter } from "next/router";
-import app from "src/utils/lib/firebase";
 interface Genre {
   name: string;
   id: number;

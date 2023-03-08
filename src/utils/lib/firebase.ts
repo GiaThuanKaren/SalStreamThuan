@@ -1,11 +1,19 @@
+import {
+  Messaging,
+  getToken,
+  isSupported,
+  getMessaging,
+} from "firebase/messaging";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import firebase from "firebase/app";
+import "firebase/messaging";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyAJTIsv8TYTh85gmqPe71fnEwGBizVV3NA",
   authDomain: "salstream-cloud-message.firebaseapp.com",
   projectId: "salstream-cloud-message",
@@ -15,6 +23,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// const app = initializeApp(firebaseConfig);
 
-export default app;
+
+
+
+// export default app;

@@ -55,7 +55,6 @@ export default function Home({
     },
   ];
 
-  console.log(slideData, MovieTabData, TVTabData, TvRecomment);
   const [selelectedTabMovie, SetselectedTabMovie] = React.useState({
     ...TabMovie[0],
     data: MovieTabData["results"],
@@ -64,14 +63,12 @@ export default function Home({
     ...TabTv[0],
     data: TVTabData.results,
   });
-  console.log(selelectedTabMovie);
   const [isLoadingMovie, SetisLoadingMovie] = React.useState(false);
   const [isLoadingTV, SetisLoadingTV] = React.useState(false);
   const HandleListTabMovie = async function (item: any) {
     try {
       SetisLoadingMovie(true);
       let result = await GetMoveOrTvByParam({ href: item.href });
-      console.log(result["results"], 123);
       // SetselectedTabMovie(item);
       SetselectedTabMovie({
         ...selelectedTabMovie,
@@ -79,7 +76,6 @@ export default function Home({
         ...item,
       });
     } catch (e) {
-      console.log(e);
       throw e;
     } finally {
       SetisLoadingMovie(false);
@@ -91,7 +87,6 @@ export default function Home({
       SetisLoadingTV(true);
 
       let result = await GetMoveOrTvByParam({ href: item.href });
-      console.log(result["results"], 123, "TV");
       SetselectedTabTV({
         ...selelectedTabTV,
         data: result["results"],
@@ -230,7 +225,16 @@ export default function Home({
               })
             )}
           </div>
-
+          <div className=" min-w-[100px] text-center hover:bg-[#007AFF] transition-all bg-[#3D4F91] rounded-xl">
+            <Link
+              href={`${selelectedTabTV.href}?page=1`}
+              className="block text-white"
+            >
+              <p className=" font-medium text-xs py-3  px-3 my-3 text-white">
+                View All
+              </p>
+            </Link>
+          </div>
           {/* TV Tab End */}
         </WrapperGrid>
       </LayoutBasic>
