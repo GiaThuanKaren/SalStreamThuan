@@ -2,7 +2,7 @@ import { Messaging } from "firebase-admin/lib/messaging/messaging";
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import React from "react";
-
+import { onBackgroundMessage } from "firebase/messaging/sw";
 import { firebaseConfig } from "src/utils/lib/firebase";
 interface StateUseToken {
   tokenFCM: string;
