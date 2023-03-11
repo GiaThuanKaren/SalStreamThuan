@@ -22,14 +22,20 @@ function Sigin() {
       Icon: <ICON icon={IconBrand.faGoogle as IconProp} />,
       bgColor: "bg-red-300",
     },
+    {
+      name: "facebook",
+      Icon: <ICON icon={IconBrand.faFacebook as IconProp} />,
+      bgColor: "bg-blue-300",
+    },
   ];
   const handleOAuthSignIn = async (provider: string) => {
     try {
       console.log("[PROVIDER]", provider);
-      signIn(provider, {
+      let result = await signIn(provider, {
         redirect: true,
         callbackUrl: "/",
       });
+      console.log("After Login", result)
     } catch (error) {
       console.log(error);
     }

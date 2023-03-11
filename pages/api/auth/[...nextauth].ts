@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
+import FacebookProvider from "next-auth/providers/facebook"
 import GoogleProvider from "next-auth/providers/google";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -12,6 +13,10 @@ export const authOptions = {
       clientId:
         "22792954187-0kgia3rbn2j066baj3e4vk1cckton43d.apps.googleusercontent.com",
       clientSecret: "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",
+    }),
+    FacebookProvider({
+      clientId:"587694192958530",
+      clientSecret:"b9282dea25bb6acae1d59b4b22e1f7a3"
     }),
     CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')
@@ -54,16 +59,25 @@ export const authOptions = {
       session,
       token,
       user,
+      ...rest
     }: {
       session: any;
       token: any;
       user: any;
     }) => {
+      console.log(session, "User Credential");
+      console.log(user, "USer 1");
+      console.log(token, "Token");
+      console.log(rest, "Rest Param");
       if (session?.user) {
         session.user.id = user.id;
       }
       return session;
     },
+  
+  },
+  event: {
+   
   },
   adapter: MongoDBAdapter(clientPromise),
   secret: "giathuan",

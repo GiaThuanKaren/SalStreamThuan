@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import React from "react";
 
+import { MongoClient } from 'mongodb';
 import {
   ListSkeleton,
   MovieItem,
@@ -12,6 +13,7 @@ import {
 import { LayoutBasic, Mainlayout } from "src/Layout";
 import { MovieModel, TVModel } from "src/Model";
 import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
+import { signOut, useSession } from "next-auth/react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -26,12 +28,15 @@ import { ICON } from "src/utils/Icon";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import { TabMovie, TabTv } from "src/utils";
+import { GetServerSideProps } from "next";
+import { getServerSession } from "next-auth";
 interface Props {
   slideData: any;
   MovieTabData?: any;
   TVTabData: any;
   TvRecomment: any;
   MoviePopular: any;
+  account: any;
 }
 export default function Home({
   slideData,
@@ -39,6 +44,7 @@ export default function Home({
   TVTabData,
   TvRecomment,
   MoviePopular,
+  account
 }: Props) {
   const SideBarTab = [
     {
@@ -54,7 +60,11 @@ export default function Home({
       data: slideData["results"].slice(0, 4),
     },
   ];
-
+  const { data: session, status } = useSession();
+  if (session) {
+    const { expires, user} = session;
+    console.log(expires, user);
+  }
   const [selelectedTabMovie, SetselectedTabMovie] = React.useState({
     ...TabMovie[0],
     data: MovieTabData["results"],
@@ -98,7 +108,7 @@ export default function Home({
       SetisLoadingTV(false);
     }
   };
-  React.useEffect(() => {}, []);
+  React.useEffect(() => { }, []);
   return (
     <>
       <LayoutBasic>
@@ -118,19 +128,17 @@ export default function Home({
                         HandleListTabMovie(item);
                       }}
                       className={
-                        `${
-                          item.title == selelectedTabMovie.title
-                            ? "border-[#EDB709] border-b-[4px]"
-                            : ""
+                        `${item.title == selelectedTabMovie.title
+                          ? "border-[#EDB709] border-b-[4px]"
+                          : ""
                         }` + "  hover:cursor-pointer "
                       }
                     >
                       <p
-                        className={`mr-3 ml-1 my-2 text-base whitespace-nowrap md:text-lg ${
-                          item.title == selelectedTabMovie.title
-                            ? "text-white font-medium "
-                            : "text-[#265D95] font-light"
-                        }   `}
+                        className={`mr-3 ml-1 my-2 text-base whitespace-nowrap md:text-lg ${item.title == selelectedTabMovie.title
+                          ? "text-white font-medium "
+                          : "text-[#265D95] font-light"
+                          }   `}
                       >
                         {item?.title}
                       </p>
@@ -179,19 +187,17 @@ export default function Home({
                         HandleListTabTB(item);
                       }}
                       className={
-                        `${
-                          item.title == selelectedTabTV.title
-                            ? "border-[#EDB709] border-b-[4px]"
-                            : ""
+                        `${item.title == selelectedTabTV.title
+                          ? "border-[#EDB709] border-b-[4px]"
+                          : ""
                         }` + "  hover:cursor-pointer "
                       }
                     >
                       <p
-                        className={`mr-3 ml-1 my-2 text-base whitespace-nowrap md:text-lg ${
-                          item.title == selelectedTabTV.title
-                            ? "text-white font-medium "
-                            : "text-[#265D95] font-light"
-                        }   `}
+                        className={`mr-3 ml-1 my-2 text-base whitespace-nowrap md:text-lg ${item.title == selelectedTabTV.title
+                          ? "text-white font-medium "
+                          : "text-[#265D95] font-light"
+                          }   `}
                       >
                         {item?.title}
                       </p>
@@ -242,7 +248,8 @@ export default function Home({
   );
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async function (context) {
+
   let slideData = await GetTreningWeek();
   let MovieTabData = await GetMoveOrTvByParam({ href: "/movie/upcoming" });
   let MoviePopular = await GetMoveOrTvByParam({ href: "/movie/popular" });
@@ -255,6 +262,7 @@ export async function getServerSideProps() {
       TVTabData,
       TvRecomment: TvRecomment,
       MoviePopular,
+      // account: JSON.parse(JSON.stringify(account))
     },
   };
 }
