@@ -67,10 +67,10 @@ function Header() {
     UpdateToken()
     if (session) {
       localStorage.setItem("session", JSON.stringify(session))
-
+      
     } else {
       localStorage.setItem("session", JSON.stringify(""))
-      localStorage.setItem("token_sal_stream", JSON.stringify(""))
+      
     }
     
   }, [session])
