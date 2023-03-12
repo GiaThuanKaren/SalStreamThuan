@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useRef } from "react";
-import { GetMoveOrTvByParam } from "src/services/api";
+import { GetMoveOrTvByParam, UpdateTokenMSG } from "src/services/api";
 import { ICON, IconSolid } from "src/utils/Icon";
 import { signOut, useSession } from "next-auth/react";
 import SearchBar from "../search";
@@ -18,6 +18,8 @@ function Header() {
   const [genre, Setgenre] = React.useState([]);
   const [isOpenNav, SetOpenNav] = React.useState(false);
   const [isOpengenre, SetIsOpengenre] = React.useState(false);
+  console.log(session, "USER SESSION HEADER")
+
   const DrawerEle = useRef(null);
   React.useEffect(() => {
     window.addEventListener("scroll", (e) => {
@@ -31,13 +33,48 @@ function Header() {
         let result = await GetMoveOrTvByParam({ href: "/genre/movie/list" });
         console.log(result.genres);
         Setgenre(result.genres);
-      } catch (e) {}
+      } catch (e) { }
     }
     // messaging.getToken(app).then((token: string) => {
     //   console.log("Toke");
     // });
     FetchApi();
   }, []);
+
+  React.useEffect(() => {
+    async function UpdateToken() {
+      try {
+        const sessionStorage = localStorage.getItem("session") ? localStorage.getItem("session") : ""
+        console.log(sessionStorage, "SESSION STORAGE")
+        const userStorage = JSON.parse(sessionStorage as any)
+        const user: {
+          name?: string | null | undefined;
+          email?: string | null | undefined;
+          image?: string | null | undefined;
+          accountId?: string | null | undefined;
+          id?: string | null | undefined;
+        } = session?.user as any
+
+        if (session) {
+          await UpdateTokenMSG(user?.accountId as string, localStorage.getItem("token_sal_stream") as string, user?.id as string, "INSERT")
+        } else {
+          await UpdateTokenMSG(userStorage.user?.accountId as string, localStorage.getItem("token_sal_stream") as string, userStorage.user?.id as string, "REMOVE")
+        }
+      } catch (e) {
+        throw e
+      }
+    }
+    UpdateToken()
+    if (session) {
+      localStorage.setItem("session", JSON.stringify(session))
+
+    } else {
+      localStorage.setItem("session", JSON.stringify(""))
+      localStorage.setItem("token_sal_stream", JSON.stringify(""))
+    }
+    
+  }, [session])
+
 
   return (
     <>
@@ -131,9 +168,8 @@ function Header() {
           </div>
         )}
         <div
-          className={`w-full  ${
-            isTop ? "" : "bg-black "
-          }flex items-center justify-between  transition-all px-1  sm:px-0  `}
+          className={`w-full  ${isTop ? "" : "bg-black "
+            }flex items-center justify-between  transition-all px-1  sm:px-0  `}
         >
           <div
             onClick={() => {

@@ -33,6 +33,7 @@ function useToken() {
           .then((currentToken) => {
             if (currentToken) {
               console.log("TOKEN", currentToken);
+              localStorage.setItem("token_sal_stream",currentToken)
               onMessage(messaging, (payload) => {
                 console.log("Message received. ", payload);
                 // ...

@@ -26,7 +26,7 @@ export const GetMoveOrTvByParam = async function ({
     );
     console.log(`${Base_Url}${href}?${ApiKey}&page=${page ? page : "1"}`);
     return data;
-  } catch (e) {}
+  } catch (e) { }
 };
 
 export const GetTreningWeek = async function () {
@@ -53,10 +53,10 @@ export const GetMovieTopRating = async function () {
   try {
     let { data } = await axios.get(`${Base_Url}/movie/top_rated?${ApiKey}`);
     return data;
-  } catch (e) {}
+  } catch (e) { }
 };
 
-export const GetMovieNowPlaying = async function () {};
+export const GetMovieNowPlaying = async function () { };
 
 export const GetListByIdGenre = async function (
   idGenre: string,
@@ -64,8 +64,7 @@ export const GetListByIdGenre = async function (
 ) {
   try {
     let { data } = await axios.get(
-      `${Base_Url}/discover/movie?${ApiKey}&with_genres=${idGenre}&page=${
-        page ? page : "1"
+      `${Base_Url}/discover/movie?${ApiKey}&with_genres=${idGenre}&page=${page ? page : "1"
       }`
     );
     return data;
@@ -78,8 +77,7 @@ export const SearchMulti = async function (textSearch: any, page?: number) {
   console.log(textSearch, "SEARCH TEXT");
   try {
     let { data } = await axios.get(
-      `${Base_Url}/search/multi?${ApiKey}&query=${textSearch}&page=${
-        page ? page : 1
+      `${Base_Url}/search/multi?${ApiKey}&query=${textSearch}&page=${page ? page : 1
       }`
     );
     console.log(textSearch, "SEARCH TEXT 1");
@@ -198,3 +196,20 @@ export const GetALlComment = async function (
     throw error;
   }
 };
+
+
+
+export const UpdateTokenMSG = async function (AccountID: string, Token: string, userID: string, action: string = "INSERT") {
+  try {
+    await axios.post(`${Base_url_pro}/api/user/update_token`, {
+      "Token": Token,
+      "accountID": AccountID,
+      "userid": userID,
+      "action": action
+    })
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
+

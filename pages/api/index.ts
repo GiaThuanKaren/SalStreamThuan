@@ -11,6 +11,6 @@ export default async function handler(
   client = new MongoClient(uri, {});
   clientPromise = client.connect();
   const collections = client.db().listCollections().toArray();
-  
+
   res.status(200).send(collections);
 }
