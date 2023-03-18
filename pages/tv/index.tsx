@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import { ListSkeleton, TVItem, WrapperGrid } from "src/components";
+import { ListSkeleton, LoadingLayer, TVItem, WrapperGrid } from "src/components";
+import { useOnLoadImages } from "src/hooks";
 import { LayoutBasic, Mainlayout } from "src/Layout";
 import { MovieModel, TVModel } from "src/Model";
 import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
@@ -35,7 +36,8 @@ function SeriesPage({
       data: slideData["results"].slice(0, 4),
     },
   ];
-
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+  const imagesLoaded = useOnLoadImages(wrapperRef);
   const [selelectedTabTV, SetselectedTabTV] = React.useState({
     ...TabTv[0],
     data: TVTabData.results,
@@ -59,6 +61,7 @@ function SeriesPage({
   };
   return (
     <LayoutBasic>
+      {!imagesLoaded && <LoadingLayer />}
       <WrapperGrid>
         <div className="flex items-center justify-between my-10 flex-wrap">
           <p className="text-lg whitespace-nowrap md:text-4xl font-bold text-white my-3">
@@ -73,19 +76,17 @@ function SeriesPage({
                       HandleListTabTB(item);
                     }}
                     className={
-                      `${
-                        item.title == selelectedTabTV.title
-                          ? "border-[#EDB709] border-b-[4px]"
-                          : ""
+                      `${item.title == selelectedTabTV.title
+                        ? "border-[#EDB709] border-b-[4px]"
+                        : ""
                       }` + " mx-3 hover:cursor-pointer "
                     }
                   >
                     <p
-                      className={`my-2 text-base whitespace-nowrap md:text-lg ${
-                        item.title == selelectedTabTV.title
+                      className={`my-2 text-base whitespace-nowrap md:text-lg ${item.title == selelectedTabTV.title
                           ? "text-white font-medium "
                           : "text-[#265D95] font-light"
-                      }   `}
+                        }   `}
                     >
                       {item?.title}
                     </p>
@@ -106,7 +107,7 @@ function SeriesPage({
           </div> */}
         </div>
 
-        <div className="flex flex-wrap">
+        <div ref={wrapperRef} className="flex flex-wrap">
           {isLoading ? (
             <ListSkeleton />
           ) : (

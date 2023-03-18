@@ -1,11 +1,12 @@
 import Link from "next/link";
 import React from "react";
-import { ListSkeleton, MovieItem, WrapperGrid } from "src/components";
+import { ListSkeleton, LoadingLayer, MovieItem, WrapperGrid } from "src/components";
 import { LayoutBasic, Mainlayout } from "src/Layout";
 import { MovieModel } from "src/Model";
 import { TabMovie, TabTv } from "src/utils";
 import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
 import { GetServerSideProps } from "next";
+import { useOnLoadImages } from "src/hooks";
 interface Props {
   slideData: any;
   MovieTabData?: any;
@@ -39,6 +40,8 @@ function MoviePage({
     ...TabMovie[0],
     data: MovieTabData["results"],
   });
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+  const imagesLoaded = useOnLoadImages(wrapperRef);
   const HandleListTabMovie = async function (item: any) {
     try {
       SetisLoading(true);
@@ -61,8 +64,9 @@ function MoviePage({
   return (
     <>
       <LayoutBasic>
+      {!imagesLoaded && <LoadingLayer />}
         <WrapperGrid>
-          <div className="flex flex-wrap items-center mt-5">
+          <div  className="flex flex-wrap items-center mt-5">
             <p className="text-lg whitespace-nowrap md:text-4xl mx-3 font-bold text-white">
               Movies
             </p>
@@ -98,7 +102,7 @@ function MoviePage({
             </div>
           </div>
 
-          <div className="flex flex-wrap">
+          <div ref={wrapperRef} className="flex flex-wrap">
             {isLoading ? (
               <ListSkeleton />
             ) : (

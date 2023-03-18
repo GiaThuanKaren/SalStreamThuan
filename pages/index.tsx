@@ -190,7 +190,7 @@ export default function Home({
             <p className="text-lg whitespace-nowrap md:text-4xl font-bold text-white my-3">
               TV Shows
             </p>
-            <div className="flex  items-center w-full flex-wrap  ">
+            <div  className="flex  items-center w-full flex-wrap  ">
               {TabTv?.map((item: any, index: number) => {
                 return (
                   <>
@@ -230,7 +230,7 @@ export default function Home({
           </div> */}
           </div>
 
-          <div className="flex flex-wrap">
+          <div ref={wrapperRef} className="flex flex-wrap">
             {isLoadingTV ? (
               <ListSkeleton />
             ) : (

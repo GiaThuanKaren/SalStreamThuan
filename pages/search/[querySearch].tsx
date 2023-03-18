@@ -2,11 +2,13 @@ import { useRouter } from "next/router";
 import React from "react";
 import {
   ListSkeleton,
+  LoadingLayer,
   MovieItem,
   Pagination,
   TVItem,
   WrapperGrid,
 } from "src/components";
+import { useOnLoadImages } from "src/hooks";
 import { LayoutBasic } from "src/Layout";
 import { SearchItemModel } from "src/Model";
 import { SearchMulti } from "src/services/api";
@@ -23,6 +25,8 @@ function PageSearch() {
   const { querySearch, page } = router.query;
   const [properties, Setproperties] = React.useState<SearchResultModel>();
   const [isLoading, SetisLoading] = React.useState(false);
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+  const imagesLoaded = useOnLoadImages(wrapperRef);
   console.log(querySearch, page, "QUERY SEARCH");
   console.log(router);
 
@@ -50,8 +54,9 @@ function PageSearch() {
   return (
     <>
       <LayoutBasic>
+      {!imagesLoaded && <LoadingLayer />}
         <WrapperGrid>
-          <div className="flex flex-wrap">
+          <div ref={wrapperRef} className="flex flex-wrap">
             {isLoading ? (
               <ListSkeleton />
             ) : (

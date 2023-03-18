@@ -3,6 +3,7 @@ import { LayoutBasic, Mainlayout } from "src/Layout";
 import { GetStaticPaths, GetStaticProps } from "next";
 import {
   ListSkeleton,
+  LoadingLayer,
   MovieItem,
   Pagination,
   Skeleton,
@@ -12,6 +13,7 @@ import {
 import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
 import { MovieModel, ResultTVModel, TVModel } from "src/Model";
 import { useRouter } from "next/router";
+import { useOnLoadImages } from "src/hooks";
 interface Props {
   slideData: any;
   MovieTabData?: any;
@@ -25,7 +27,8 @@ interface Props {
 function SlugMoviePage() {
   const router = useRouter();
   const [isLoading, SetisLoading] = React.useState(false);
-
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+  const imagesLoaded = useOnLoadImages(wrapperRef);
   const { page, nameslug } = router.query;
   const [properties, Setproperties] = React.useState<ResultTVModel>();
   console.log(router);
@@ -50,8 +53,9 @@ function SlugMoviePage() {
   return (
     <>
       <LayoutBasic>
+        {!imagesLoaded && <LoadingLayer />}
         <WrapperGrid>
-          <div className="flex flex-wrap">
+          <div ref={wrapperRef} className="flex flex-wrap">
             {isLoading ? (
               <ListSkeleton />
             ) : (
