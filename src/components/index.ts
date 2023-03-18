@@ -4,6 +4,7 @@ import Header from "./header";
 import Image from "./Image";
 import ListComment from "./ListComment";
 import ListSkeleton from "./ListItemSkeleton";
+import LoadingLayer from "./LoadingLayer";
 import ModelPopup from "./ModalPopUp";
 import MovieItem from "./MovieItem";
 import Pagination from "./pagination";
@@ -16,6 +17,7 @@ import TVItem from "./TVItem";
 import WrapperGrid from "./wrapper";
 
 export {
+  LoadingLayer,
   Spinner,
   ListComment,
   CommentInput,

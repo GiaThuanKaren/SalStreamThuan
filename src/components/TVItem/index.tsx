@@ -7,7 +7,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 function TVItem({ item }: { item: TVModel }) {
   return (
     <>
-      <div className="basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5 min-h-[250px]  px-5 py-1 my-3">
+      <div className="basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5 min-h-[250px]  px-5 py-1 my-3 ">
         {/*  contend Movie */}
         <Link href={`/tv/detail/${item.id}`}>
           <div className="h-full  w-full">
@@ -15,7 +15,7 @@ function TVItem({ item }: { item: TVModel }) {
               {
                 (item && item["poster_path"]) ? <LazyLoadImage
                   effect="blur"
-                  className="h-full  object-contain"
+                  className="h-[300px]  object-contain"
                   src={"https://image.tmdb.org/t/p/w300/" + item["poster_path"]}
                   alt="img"
                 /> : (

@@ -13,7 +13,7 @@ function useToken() {
   const HandleMessageIncoming = async function (messageVar: any) {
     try {
       onMessage(messageVar, (payload) => {
-        console.log("Message received. ", payload);
+        console.log("Message received. 123 ", payload);
         // ...
       });
     } catch (error) {
@@ -35,7 +35,7 @@ function useToken() {
               console.log("TOKEN", currentToken);
               localStorage.setItem("token_sal_stream",currentToken)
               onMessage(messaging, (payload) => {
-                console.log("Message received. ", payload);
+                console.log("Message received. 123123 ", payload);
                 // ...
               });
               setTokenFCM({

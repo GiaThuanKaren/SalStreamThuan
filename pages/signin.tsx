@@ -2,7 +2,7 @@ import React from "react";
 import { LayoutBasic } from "src/Layout";
 import { ICON, IconBrand, IconSolid } from "src/utils/Icon";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn, signOut, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 interface Item {
   Icon: JSX.Element;
@@ -29,13 +29,19 @@ function Sigin() {
     },
   ];
   const handleOAuthSignIn = async (provider: string) => {
+    localStorage.setItem("salstream_provider",provider)
     try {
       console.log("[PROVIDER]", provider);
       let result = await signIn(provider, {
         redirect: true,
-        callbackUrl: "/",
-      });
-      console.log("After Login", result)
+        callbackUrl: "/"
+      })
+      if (!result?.error) {
+        const session = await getSession();
+
+        console.log(session?.user, "USER AFTER LOGIN INNNNNNNNNN"); // full account information
+
+      }
     } catch (error) {
       console.log(error);
     }

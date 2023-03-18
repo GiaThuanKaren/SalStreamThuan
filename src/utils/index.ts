@@ -1,4 +1,6 @@
 import { ToastContainer, toast } from "react-toastify";
+import React from "react"
+import { Account, Profile, User } from "next-auth";
 export const TabMovie = [
   {
     title: "Latest",
@@ -40,3 +42,26 @@ export const TabTv = [
 export const ShowToastify = (message: string) => {
   toast(message);
 };
+
+interface UserLocalInf {
+  currentProvider?: string;
+  currentAcccountId?: string;
+}
+export const UserStorageLocal = function () {
+  
+}
+
+
+export const signInCallBack = async function ({ user, account, profile, email, credentials }: { account: Account; user: User; profile: Profile; email: any; credentials: any }) {
+
+  try {
+
+    console.log("Callback signIn", user, account)
+    return {
+      accountUser: account,
+     
+    };
+  } catch (e) {
+
+  }
+}

@@ -6,6 +6,14 @@ import { signOut, useSession } from "next-auth/react";
 import SearchBar from "../search";
 import messaging from "firebase/messaging";
 import { useRouter } from "next/router";
+export interface DefaultSession extends Record<string, unknown> {
+  user?: {
+    name?: string | null
+    email?: string | null
+    image?: string | null
+  }
+  expires?: string
+}
 interface Genre {
   name: string;
   id: number;
@@ -66,13 +74,17 @@ function Header() {
     }
     UpdateToken()
     if (session) {
+      const userSesion: any = session.user;
+      const accountID = userSesion?.accountId
       localStorage.setItem("session", JSON.stringify(session))
-      
+
+      console.log(localStorage.getItem("salstream_provider"))
+
     } else {
-      localStorage.setItem("session", JSON.stringify(""))
-      
+
+
     }
-    
+
   }, [session])
 
 

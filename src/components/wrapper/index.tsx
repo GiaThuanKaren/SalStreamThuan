@@ -98,9 +98,9 @@ function WrapperGrid({ children }: Props) {
                     {item.data?.map((item1: MovieModel, index: number) => {
                       return (
                         <>
-                          <div className="flex justify-between h-[128px] w-full my-6 ">
-                            <div className=" flex-1">
-                              <div className="h-full relative w-full  ">
+                          <div className="flex  h-[128px] w-full my-6 ">
+                            <div className="flex-[0] md:flex-1 mr-3">
+                              <div className="h-full relative w-full overflow-hidden  ">
                                 <img
                                   className="h-full "
                                   src={

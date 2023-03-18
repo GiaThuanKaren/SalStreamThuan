@@ -34,7 +34,7 @@ function DetailGenrePage() {
       }
     }
     FetchApi();
-  }, [page,idgenre]);
+  }, [page, idgenre]);
   return (
     <>
       <LayoutBasic>

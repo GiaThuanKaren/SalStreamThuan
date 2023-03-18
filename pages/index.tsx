@@ -5,6 +5,7 @@ import React from "react";
 import { MongoClient } from 'mongodb';
 import {
   ListSkeleton,
+  LoadingLayer,
   MovieItem,
   Slider,
   TVItem,
@@ -30,6 +31,7 @@ import Link from "next/link";
 import { TabMovie, TabTv } from "src/utils";
 import { GetServerSideProps } from "next";
 import { getServerSession } from "next-auth";
+import { useOnLoadImages } from "src/hooks";
 interface Props {
   slideData: any;
   MovieTabData?: any;
@@ -46,6 +48,10 @@ export default function Home({
   MoviePopular,
   account
 }: Props) {
+  if (slideData) {
+    console.log("INIT STAGE YES")
+  } else console.log("INIT STAGE NO")
+
   const SideBarTab = [
     {
       title: "Latest Movie",
@@ -61,10 +67,14 @@ export default function Home({
     },
   ];
   const { data: session, status } = useSession();
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+  const imagesLoaded = useOnLoadImages(wrapperRef);
+
   if (session) {
-    const { expires, user} = session;
+    const { expires, user } = session;
     console.log(expires, user);
   }
+
   const [selelectedTabMovie, SetselectedTabMovie] = React.useState({
     ...TabMovie[0],
     data: MovieTabData["results"],
@@ -111,7 +121,9 @@ export default function Home({
   React.useEffect(() => { }, []);
   return (
     <>
+
       <LayoutBasic>
+        {!imagesLoaded && <LoadingLayer />}
         <Slider slidedata={slideData["results"]} />
         <WrapperGrid>
           {/* Movie Tab Start */}
@@ -149,7 +161,7 @@ export default function Home({
             </div>
           </div>
 
-          <div className="flex flex-wrap">
+          <div ref={wrapperRef} className="flex flex-wrap">
             {isLoadingMovie ? (
               <ListSkeleton />
             ) : (
