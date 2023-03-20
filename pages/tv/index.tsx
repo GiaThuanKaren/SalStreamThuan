@@ -18,7 +18,7 @@ function SeriesPage() {
   })
   const [selelectedTabTV, SetselectedTabTV] = React.useState({
     ...TabTv[0],
-    data: TVTabData.results,
+    data: []
   });
   const HandleListTabTB = async function (item: any) {
     try {
@@ -53,7 +53,7 @@ function SeriesPage() {
   }, [])
   return (
     <LayoutBasic>
-      {!imagesLoaded && <LoadingLayer />}
+      {selelectedTabTV.data.length == 0 && <LoadingLayer />}
       <WrapperGrid>
         <div className="flex items-center justify-between my-10 flex-wrap">
           <p className="text-lg whitespace-nowrap md:text-4xl font-bold text-white my-3">

@@ -2,7 +2,7 @@ import React from "react";
 import { LayoutBasic, Mainlayout } from "src/Layout";
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
 import { GetListByIdGenre } from "src/services/api";
-import { ListSkeleton, MovieItem, Pagination, WrapperGrid } from "src/components";
+import { ListSkeleton, LoadingLayer, MovieItem, Pagination, WrapperGrid } from "src/components";
 import { useRouter } from "next/router";
 import { MovieModel, ResultMovieModel } from "src/Model";
 interface Props {
@@ -38,6 +38,7 @@ function DetailGenrePage() {
   return (
     <>
       <LayoutBasic>
+        {isLoading && <LoadingLayer />}
         <WrapperGrid>
           <h1 className="text-white capitalize font-medium">
             Most View {namegenre}
