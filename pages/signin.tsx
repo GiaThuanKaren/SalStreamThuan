@@ -12,11 +12,7 @@ interface Item {
 function Sigin() {
   const { push } = useRouter();
   const providers = [
-    {
-      name: "github",
-      Icon: <ICON icon={IconBrand.faGithub as IconProp} />,
-      bgColor: "bg-blue-400",
-    },
+   
     {
       name: "google",
       Icon: <ICON icon={IconBrand.faGoogle as IconProp} />,
