@@ -39,6 +39,11 @@
 
 ![image](https://user-images.githubusercontent.com/86192249/221354355-793f25c9-35c7-4947-b287-7e0e7b46c388.png)
 
+## Detail Movie
+
+![image](https://user-images.githubusercontent.com/86192249/226113170-6a868d83-b67d-47de-addd-109a39dabbb7.png)
+
+
 
 ##  Login Page
 
