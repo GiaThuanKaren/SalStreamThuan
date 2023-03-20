@@ -41,50 +41,37 @@ interface Props {
   account: any;
 }
 export default function Home({
-  slideData,
-  MovieTabData,
-  TVTabData,
+
   TvRecomment,
   MoviePopular,
   account
 }: Props) {
-  if (slideData) {
-    console.log("INIT STAGE YES")
-  } else console.log("INIT STAGE NO")
 
-  const SideBarTab = [
-    {
-      title: "Latest Movie",
-      data: MoviePopular?.results.slice(0, 4),
-    },
-    {
-      title: "Recomendation",
-      data: MovieTabData["results"].slice(0, 4),
-    },
-    {
-      title: "More Movies",
-      data: slideData["results"].slice(0, 4),
-    },
-  ];
   const { data: session, status } = useSession();
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const imagesLoaded = useOnLoadImages(wrapperRef);
-
+  const [isLoadingMovie, SetisLoadingMovie] = React.useState(false);
+  const [isLoadingTV, SetisLoadingTV] = React.useState(false);
   if (session) {
     const { expires, user } = session;
     console.log(expires, user);
   }
-
+  const [propertiest, setProperties] = React.useState<any>({
+    slideData: undefined,
+    MovieTabData: undefined,
+    TVTabData: undefined,
+    MoviePopular:undefined
+  })
+  const { slideData, MovieTabData, TVTabData } = propertiest
   const [selelectedTabMovie, SetselectedTabMovie] = React.useState({
     ...TabMovie[0],
-    data: MovieTabData["results"],
+    data: MovieTabData?.results,
   });
   const [selelectedTabTV, SetselectedTabTV] = React.useState({
     ...TabTv[0],
-    data: TVTabData.results,
+    data: TVTabData?.results,
   });
-  const [isLoadingMovie, SetisLoadingMovie] = React.useState(false);
-  const [isLoadingTV, SetisLoadingTV] = React.useState(false);
+
   const HandleListTabMovie = async function (item: any) {
     try {
       SetisLoadingMovie(true);
@@ -118,13 +105,38 @@ export default function Home({
       SetisLoadingTV(false);
     }
   };
-  React.useEffect(() => { }, []);
+  React.useEffect(() => {
+    async function FetchApi() {
+      try {
+        let slideData = await GetTreningWeek();
+        let MovieTabData = await GetMoveOrTvByParam({ href: "/movie/upcoming" });
+        let MoviePopular = await GetMoveOrTvByParam({ href: "/movie/popular" });
+        let TVTabData = await GetMoveOrTvByParam({ href: "/tv/airing_today" });
+        setProperties({
+          slideData,
+          MovieTabData,
+          MoviePopular
+        })
+        SetselectedTabMovie({
+          ...selelectedTabMovie,
+          data: MovieTabData?.results
+        })
+        SetselectedTabTV({
+          ...selelectedTabTV,
+          data: TVTabData?.results
+        })
+      } catch (error) {
+        throw error
+      }
+    }
+    FetchApi()
+  }, []);
   return (
     <>
 
       <LayoutBasic>
         {!imagesLoaded && <LoadingLayer />}
-        <Slider slidedata={slideData["results"]} />
+        <Slider slidedata={slideData?.results} />
         <WrapperGrid>
           {/* Movie Tab Start */}
           <div className="flex flex-wrap items-center mt-5">
@@ -190,7 +202,7 @@ export default function Home({
             <p className="text-lg whitespace-nowrap md:text-4xl font-bold text-white my-3">
               TV Shows
             </p>
-            <div  className="flex  items-center w-full flex-wrap  ">
+            <div className="flex  items-center w-full flex-wrap  ">
               {TabTv?.map((item: any, index: number) => {
                 return (
                   <>
@@ -231,6 +243,7 @@ export default function Home({
           </div>
 
           <div ref={wrapperRef} className="flex flex-wrap">
+            
             {isLoadingTV ? (
               <ListSkeleton />
             ) : (
@@ -260,21 +273,3 @@ export default function Home({
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async function (context) {
-
-  let slideData = await GetTreningWeek();
-  let MovieTabData = await GetMoveOrTvByParam({ href: "/movie/upcoming" });
-  let MoviePopular = await GetMoveOrTvByParam({ href: "/movie/popular" });
-  let TVTabData = await GetMoveOrTvByParam({ href: "/tv/airing_today" });
-  let TvRecomment = await GetMoveOrTvByParam({ href: "/tv/on_the_air" });
-  return {
-    props: {
-      slideData: slideData,
-      MovieTabData,
-      TVTabData,
-      TvRecomment: TvRecomment,
-      MoviePopular,
-      // account: JSON.parse(JSON.stringify(account))
-    },
-  };
-}
