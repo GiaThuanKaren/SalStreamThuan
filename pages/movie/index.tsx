@@ -14,18 +14,12 @@ interface Props {
   TvRecomment: any;
   MoviePopular: any;
 }
-function MoviePage({
-  slideData,
-  MovieTabData,
-  TVTabData,
-  TvRecomment,
-  MoviePopular,
-}: Props) {
+function MoviePage() {
 
   const [isLoading, SetisLoading] = React.useState(false);
   const [selelectedTabMovie, SetselectedTabMovie] = React.useState({
     ...TabMovie[0],
-    data: MovieTabData["results"],
+    data: [],
   });
   const [movieTabData, SetMovieTabData] = React.useState({
 
@@ -68,7 +62,7 @@ function MoviePage({
   return (
     <>
       <LayoutBasic>
-        {!imagesLoaded && <LoadingLayer />}
+        {selelectedTabMovie.data.length == 0 && <LoadingLayer />}
         <WrapperGrid>
           <div className="flex flex-wrap items-center mt-5">
             <p className="text-lg whitespace-nowrap md:text-4xl mx-3 font-bold text-white">
@@ -132,23 +126,3 @@ function MoviePage({
 }
 
 export default MoviePage;
-export const getServerSideProps: GetServerSideProps = async function ({
-  query,
-}) {
-  const { slug } = query;
-  console.log(query, "QUERY");
-  let slideData = await GetTreningWeek();
-  let MovieTabData = await GetMoveOrTvByParam({ href: "/movie/upcoming" });
-  let MoviePopular = await GetMoveOrTvByParam({ href: "/movie/popular" });
-  let TVTabData = await GetMoveOrTvByParam({ href: "/tv/airing_today" });
-  let TvRecomment = await GetMoveOrTvByParam({ href: "/tv/on_the_air" });
-  return {
-    props: {
-      slideData: slideData,
-      MovieTabData,
-      TVTabData,
-      TvRecomment: TvRecomment,
-      MoviePopular,
-    },
-  };
-};
