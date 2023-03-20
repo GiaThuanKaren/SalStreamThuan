@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { MovieModel, Result } from "src/Model";
 import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
@@ -96,44 +97,47 @@ function WrapperGrid({ children }: Props) {
                   </div>
                   <div>
                     {item.data?.map((item1: MovieModel, index: number) => {
+
                       return (
                         <>
-                          <div className="flex  h-[128px] w-full my-6 ">
-                            <div className="flex-[0] md:flex-1 mr-3">
-                              <div className="h-full relative w-full overflow-hidden  ">
-                                <img
-                                  className="h-full "
-                                  src={
-                                    "https://image.tmdb.org/t/p/w300" +
-                                    item1?.poster_path
-                                  }
-                                  alt=""
-                                />
-                                <div className=" absolute top-0 left-0 flex items-center justify-center font-medium bg-[#007AFF] text-white h-[34px] w-[34px] rounded-full ">
-                                  <p>#{index + 1}</p>
+                          <Link href={`/movie/detail/${item1.id}`}>
+                            <div className="flex  h-[128px] w-full my-6 ">
+                              <div className="flex-[0] md:flex-1 mr-3">
+                                <div className="h-full relative w-full overflow-hidden  ">
+                                  <img
+                                    className="h-full "
+                                    src={
+                                      "https://image.tmdb.org/t/p/w300" +
+                                      item1?.poster_path
+                                    }
+                                    alt=""
+                                  />
+                                  <div className=" absolute top-0 left-0 flex items-center justify-center font-medium bg-[#007AFF] text-white h-[34px] w-[34px] rounded-full ">
+                                    <p>#{index + 1}</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="flex-1 text-white">
+                                <p>{item1.title}</p>
+                                <div className="flex justify-between items-center">
+                                  <p className="text-[#EDB709]">
+                                    {item1.vote_average}/10
+                                  </p>
+                                  <p className="mx-2">
+                                    {item1?.release_date
+                                      ?.toString()
+                                      .substring(
+                                        0,
+                                        item1?.release_date.indexOf("-")
+                                      )}
+                                  </p>
+                                  <p className="text-center px-2 py-1 bg-[#EDB709] text-black rounded-2xl text-xs font-medium">
+                                    HD
+                                  </p>
                                 </div>
                               </div>
                             </div>
-                            <div className="flex-1 text-white">
-                              <p>{item1.title}</p>
-                              <div className="flex justify-between items-center">
-                                <p className="text-[#EDB709]">
-                                  {item1.vote_average}/10
-                                </p>
-                                <p className="mx-2">
-                                  {item1?.release_date
-                                    ?.toString()
-                                    .substring(
-                                      0,
-                                      item1?.release_date.indexOf("-")
-                                    )}
-                                </p>
-                                <p className="text-center px-2 py-1 bg-[#EDB709] text-black rounded-2xl text-xs font-medium">
-                                  HD
-                                </p>
-                              </div>
-                            </div>
-                          </div>
+                          </Link>
                         </>
                       );
                     })}

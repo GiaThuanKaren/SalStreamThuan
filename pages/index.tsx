@@ -60,16 +60,16 @@ export default function Home({
     slideData: undefined,
     MovieTabData: undefined,
     TVTabData: undefined,
-    MoviePopular:undefined
+    MoviePopular: undefined
   })
   const { slideData, MovieTabData, TVTabData } = propertiest
   const [selelectedTabMovie, SetselectedTabMovie] = React.useState({
     ...TabMovie[0],
-    data: MovieTabData?.results,
+    data: [],
   });
   const [selelectedTabTV, SetselectedTabTV] = React.useState({
     ...TabTv[0],
-    data: TVTabData?.results,
+    data: [],
   });
 
   const HandleListTabMovie = async function (item: any) {
@@ -135,7 +135,8 @@ export default function Home({
     <>
 
       <LayoutBasic>
-        {!imagesLoaded && <LoadingLayer />}
+        {!imagesLoaded || (selelectedTabMovie.data.length == 0 && selelectedTabTV.data.length == 0 && !slideData ) && <LoadingLayer />}
+        <p className="text-white">{imagesLoaded ? "Loaded" : " Loading"}</p>
         <Slider slidedata={slideData?.results} />
         <WrapperGrid>
           {/* Movie Tab Start */}
@@ -243,7 +244,7 @@ export default function Home({
           </div>
 
           <div ref={wrapperRef} className="flex flex-wrap">
-            
+
             {isLoadingTV ? (
               <ListSkeleton />
             ) : (
