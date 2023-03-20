@@ -6,38 +6,16 @@ import { LayoutBasic, Mainlayout } from "src/Layout";
 import { MovieModel, TVModel } from "src/Model";
 import { GetMoveOrTvByParam, GetTreningWeek } from "src/services/api";
 import { TabMovie, TabTv } from "src/utils";
-interface Props {
-  slideData: any;
-  MovieTabData?: any;
-  TVTabData: any;
-  TvRecomment: any;
-  MoviePopular: any;
-}
-function SeriesPage({
-  slideData,
-  MovieTabData,
-  TVTabData,
-  TvRecomment,
-  MoviePopular,
-}: Props) {
+
+function SeriesPage() {
   const [isLoading, SetisLoading] = React.useState(false);
 
-  const SideBarTab = [
-    {
-      title: "Latest Movie",
-      data: MoviePopular?.results.slice(0, 4),
-    },
-    {
-      title: "Recomendation",
-      data: MovieTabData["results"].slice(0, 4),
-    },
-    {
-      title: "More Movies",
-      data: slideData["results"].slice(0, 4),
-    },
-  ];
+
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const imagesLoaded = useOnLoadImages(wrapperRef);
+  const [TVTabData, SetTVSTabData] = React.useState<any>({
+
+  })
   const [selelectedTabTV, SetselectedTabTV] = React.useState({
     ...TabTv[0],
     data: TVTabData.results,
@@ -59,6 +37,20 @@ function SeriesPage({
       SetisLoading(false);
     }
   };
+  React.useEffect(() => {
+    async function FetchApi() {
+      try {
+        let TVTabData = await GetMoveOrTvByParam({ href: "/tv/airing_today" });
+        SetselectedTabTV({
+          ...selelectedTabTV,
+          data: TVTabData?.results
+        })
+      } catch (error) {
+        throw error
+      }
+    }
+    FetchApi()
+  }, [])
   return (
     <LayoutBasic>
       {!imagesLoaded && <LoadingLayer />}
@@ -84,8 +76,8 @@ function SeriesPage({
                   >
                     <p
                       className={`my-2 text-base whitespace-nowrap md:text-lg ${item.title == selelectedTabTV.title
-                          ? "text-white font-medium "
-                          : "text-[#265D95] font-light"
+                        ? "text-white font-medium "
+                        : "text-[#265D95] font-light"
                         }   `}
                     >
                       {item?.title}
@@ -138,19 +130,3 @@ function SeriesPage({
 
 export default SeriesPage;
 
-export async function getServerSideProps() {
-  let slideData = await GetTreningWeek();
-  let MovieTabData = await GetMoveOrTvByParam({ href: "/movie/upcoming" });
-  let MoviePopular = await GetMoveOrTvByParam({ href: "/movie/popular" });
-  let TVTabData = await GetMoveOrTvByParam({ href: "/tv/airing_today" });
-  let TvRecomment = await GetMoveOrTvByParam({ href: "/tv/on_the_air" });
-  return {
-    props: {
-      slideData: slideData,
-      MovieTabData,
-      TVTabData,
-      TvRecomment: TvRecomment,
-      MoviePopular,
-    },
-  };
-}

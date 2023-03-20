@@ -21,25 +21,15 @@ function MoviePage({
   TvRecomment,
   MoviePopular,
 }: Props) {
-  const SideBarTab = [
-    {
-      title: "Latest Movie",
-      data: MoviePopular?.results.slice(0, 4),
-    },
-    {
-      title: "Recomendation",
-      data: MovieTabData["results"].slice(0, 4),
-    },
-    {
-      title: "More Movies",
-      data: slideData["results"].slice(0, 4),
-    },
-  ];
+
   const [isLoading, SetisLoading] = React.useState(false);
   const [selelectedTabMovie, SetselectedTabMovie] = React.useState({
     ...TabMovie[0],
     data: MovieTabData["results"],
   });
+  const [movieTabData, SetMovieTabData] = React.useState({
+
+  })
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const imagesLoaded = useOnLoadImages(wrapperRef);
   const HandleListTabMovie = async function (item: any) {
@@ -60,13 +50,27 @@ function MoviePage({
       SetisLoading(false);
     }
   };
+  React.useEffect(() => {
+    async function FetchApi() {
+      try {
+        let MovieTabData = await GetMoveOrTvByParam({ href: "/movie/upcoming" });
+        SetselectedTabMovie({
+          ...selelectedTabMovie,
+          data: MovieTabData["results"],
 
+        });
+      } catch (error) {
+        throw error
+      }
+    }
+    FetchApi()
+  }, [])
   return (
     <>
       <LayoutBasic>
-      {!imagesLoaded && <LoadingLayer />}
+        {!imagesLoaded && <LoadingLayer />}
         <WrapperGrid>
-          <div  className="flex flex-wrap items-center mt-5">
+          <div className="flex flex-wrap items-center mt-5">
             <p className="text-lg whitespace-nowrap md:text-4xl mx-3 font-bold text-white">
               Movies
             </p>
@@ -79,19 +83,17 @@ function MoviePage({
                         HandleListTabMovie(item);
                       }}
                       className={
-                        `${
-                          item.title == selelectedTabMovie.title
-                            ? "border-[#EDB709] border-b-[4px]"
-                            : ""
+                        `${item.title == selelectedTabMovie.title
+                          ? "border-[#EDB709] border-b-[4px]"
+                          : ""
                         }` + "  hover:cursor-pointer "
                       }
                     >
                       <p
-                        className={`mr-3 ml-1 my-2 text-base whitespace-nowrap md:text-lg ${
-                          item.title == selelectedTabMovie.title
-                            ? "text-white font-medium "
-                            : "text-[#265D95] font-light"
-                        }   `}
+                        className={`mr-3 ml-1 my-2 text-base whitespace-nowrap md:text-lg ${item.title == selelectedTabMovie.title
+                          ? "text-white font-medium "
+                          : "text-[#265D95] font-light"
+                          }   `}
                       >
                         {item?.title}
                       </p>
