@@ -135,8 +135,7 @@ export default function Home({
     <>
 
       <LayoutBasic>
-        {!imagesLoaded || (selelectedTabMovie.data.length == 0 && selelectedTabTV.data.length == 0 && !slideData ) && <LoadingLayer />}
-        <p className="text-white">{imagesLoaded ? "Loaded" : " Loading"}</p>
+        {!imagesLoaded || (selelectedTabMovie.data.length == 0 && selelectedTabTV.data.length == 0 && !slideData) && <LoadingLayer />}
         <Slider slidedata={slideData?.results} />
         <WrapperGrid>
           {/* Movie Tab Start */}

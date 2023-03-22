@@ -1,6 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper";
+import { Pagination, Navigation, Autoplay } from "swiper";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -20,18 +20,22 @@ function Slider({ slidedata = [] }: Props) {
         slidesPerView={1}
         spaceBetween={30}
         loop={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
         pagination={{
           clickable: true,
         }}
-        modules={[Pagination, Navigation]}
-        
+        modules={[Pagination, Navigation, Autoplay]}
+
         className="mySwiper h-fit"
       >
         {slidedata?.map((item: MovieModel, index) => {
           return (
             <>
               <SwiperSlide key={index}>
-              
+
                 <div className="h-full w-full relative bg-slate-200 flex justify-center items-center">
                   {/* bg-slider */}
                   <div
@@ -85,7 +89,7 @@ function Slider({ slidedata = [] }: Props) {
                     </div>
                   </div>
                 </div>
-               
+
               </SwiperSlide>
             </>
           );

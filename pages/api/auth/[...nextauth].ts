@@ -25,12 +25,13 @@ async function getUserAccount(userId: string) {
     await client.close();
   }
 }
+
 export const authOptions = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
       clientId:
-        "22792954187-0kgia3rbn2j066baj3e4vk1cckton43d.apps.googleusercontent.com",
+        process.env.NEXT_PUBLIC_GGID as string,
       clientSecret: "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",
 
     }),
@@ -44,7 +45,7 @@ export const authOptions = {
   ],
 
   callbacks: {
-   
+
     session: async ({
       session,
       token,

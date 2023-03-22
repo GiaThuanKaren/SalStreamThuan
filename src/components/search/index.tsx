@@ -27,7 +27,7 @@ function SearchBar() {
   return (
     <>
       <div className="relative  ">
-        <div className="flex items-center text-white rounded-2xl border-[1px] px-2 h-9">
+        <div className="flex items-center text-white rounded-2xl border-[1px] px-3 h-9">
           <input
             onKeyDown={(e) => {
               if (e.key === "Enter") {
