@@ -1,8 +1,7 @@
 import { ShowToastify } from "./../index";
 // This approach is taken from https://github.com/vercel/next.js/tree/canary/examples/with-mongodb
 import { MongoClient } from "mongodb";
-export const uri =
-  "mongodb+srv://salstream:salstream2002@cluster0.a6cyoli.mongodb.net/salstream?retryWrites=true&w=majority";
+export const uri = process.env.NEXT_PUBLIC_MONGOURL as string;
 
 if (!uri) {
   throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
@@ -91,8 +90,8 @@ export async function watchCollectionChange(
 
 export async function RetriveUserInfo() {
   try {
-    
-  } catch (e) {}
+
+  } catch (e) { }
 }
 
 export default clientPromise;

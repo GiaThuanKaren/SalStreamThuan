@@ -14,12 +14,12 @@ import "firebase/messaging";
 
 // Your web app's Firebase configuration
 export const firebaseConfig = {
-  apiKey: "AIzaSyAJTIsv8TYTh85gmqPe71fnEwGBizVV3NA",
-  authDomain: "salstream-cloud-message.firebaseapp.com",
-  projectId: "salstream-cloud-message",
-  storageBucket: "salstream-cloud-message.appspot.com",
-  messagingSenderId: "932595126454",
-  appId: "1:932595126454:web:394b088254eb5ea8ba9617",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY as string,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECTID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APPID,
 };
 
 // Initialize Firebase

@@ -32,12 +32,12 @@ export const authOptions = {
     GoogleProvider({
       clientId:
         process.env.NEXT_PUBLIC_GGID as string,
-      clientSecret: "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",
+      clientSecret: process.env.NEXT_PUBLIC_GGSEC as string,
 
     }),
     FacebookProvider({
-      clientId: "587694192958530",
-      clientSecret: "b9282dea25bb6acae1d59b4b22e1f7a3",
+      clientId: process.env.NEXT_PUBLIC_FBID as string,
+      clientSecret: process.env.NEXT_PUBLIC_FBSEC as string,
     }),
 
 
