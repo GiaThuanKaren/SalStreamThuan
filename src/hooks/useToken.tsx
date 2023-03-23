@@ -28,12 +28,12 @@ function useToken() {
       if (permission == "granted") {
         getToken(messaging, {
           vapidKey:
-            "BG35iwrect5LCXN_jhH549Nz9qWPV5IodLpvQYhtCadE5_Tg2AEJ0wzr7GFz38MXzwvBjZYhEoFmRXRL8cDKW3s",
+            process.env.NEXT_PUBLIC_APIKEY_MESSAGING,
         })
           .then((currentToken) => {
             if (currentToken) {
               console.log("TOKEN", currentToken);
-              localStorage.setItem("token_sal_stream",currentToken)
+              localStorage.setItem("token_sal_stream", currentToken)
               onMessage(messaging, (payload) => {
                 console.log("Message received. 123123 ", payload);
                 // ...
