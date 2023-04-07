@@ -1,0 +1,101 @@
+// generator client {
+//   provider = "prisma-client-js"
+// }
+
+// // mongodb+srv://nextauthdemo:nextauthdemo@cluster0.a6cyoli.mongodb.net/nextauthdemo?retryWrites=true&w=majority
+// // mongodb+srv://salstream:salstream2002@cluster0.a6cyoli.mongodb.net/salstream?retryWrites=true&w=majority
+// datasource db {
+//   provider = "mongodb"
+//   url      = "mongodb+srv://salstream:salstream2002@cluster0.a6cyoli.mongodb.net/salstream?retryWrites=true&w=majority"
+// }
+
+// model User {
+//   id             String    @id @default(auto()) @map("_id") @db.ObjectId
+//   name           String?
+//   email          String?   @unique
+//   emailVerified  DateTime?
+//   image          String?
+//   hashedPassword String?
+//   createdAt      DateTime  @default(now())
+//   updatedAt      DateTime  @updatedAt
+//   favoriteIds    String[]  @db.ObjectId
+
+//   accounts     Account[]
+  
+// }
+
+// model Account {
+//   id                String  @id @default(auto()) @map("_id") @db.ObjectId
+//   userId            String  @db.ObjectId
+//   type              String
+//   provider          String
+//   providerAccountId String
+//   refresh_token     String? @db.String
+//   access_token      String? @db.String
+//   expires_at        Int?
+//   token_type        String?
+//   scope             String?
+//   id_token          String? @db.String
+//   session_state     String?
+
+//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//   @@unique([provider, providerAccountId])
+// }
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = "mongodb+srv://salstream:salstream2002@cluster0.a6cyoli.mongodb.net/salstream?retryWrites=true&w=majority"
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model VerificationToken {
+  identifier String   @id @default(auto()) @map("_id") @db.ObjectId
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

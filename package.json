@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev ",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -14,7 +14,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@next-auth/mongodb-adapter": "^1.1.1",
+    "@next-auth/prisma-adapter": "^1.0.5",
     "@types/istanbul-lib-coverage": "^2.0.4",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
@@ -29,7 +29,7 @@
     "moment": "^2.29.4",
     "mongodb": "^4.14.0",
     "next": "13.1.6",
-    "next-auth": "^4.19.2",
+    "next-auth": "^4.21.0",
     "nextjs-progressbar": "^0.0.16",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -43,6 +43,7 @@
     "@types/react-lazy-load-image-component": "^1.5.2",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.21",
+    "prisma": "^4.12.0",
     "tailwindcss": "^3.2.4"
   }
 }

@@ -56,7 +56,7 @@ const ReplyCommentComp: FC<{ dataComment: Comment }> = function ({
           <div className="h-10 w-10 rounded-full overflow-hidden mr-5 mt-1 mb-3">
             <LazyLoadImage
               className="h-full w-full object-cover"
-              src={dataComment.user[0].image}
+              src={dataComment.user[0]?.image}
             />
           </div>
           <div>

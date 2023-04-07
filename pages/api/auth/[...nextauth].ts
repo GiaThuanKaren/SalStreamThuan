@@ -1,33 +1,21 @@
 import { signInCallBack } from './../../../src/utils/index';
-import NextAuth, { Account, User } from "next-auth";
+import NextAuth, { Account, User, AuthOptions, Session } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import FacebookProvider from "next-auth/providers/facebook";
 import GoogleProvider from "next-auth/providers/google";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+
 import CredentialsProvider from "next-auth/providers/credentials";
 import clientPromise, { uri } from "src/utils/lib/mongodb";
 import { MongoClient } from 'mongodb';
 import { AdapterUser } from 'next-auth/adapters';
-async function getUserAccount(userId: string) {
-  const client = new MongoClient(uri);
-  try {
-    await client.connect();
-    const accounts = client.db().collection('accounts');
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { PrismaClient } from '@prisma/client';
+import prisma3 from "src/utils/lib/prismadb"
 
-    // const session = await sessions.findOne({})
-    const account = await accounts.findOne({ user_id: userId });
 
-    if (!account) {
-      throw new Error('Account not found');
-    }
-    return account;
-  } finally {
-    await client.close();
-  }
-}
-
-export const authOptions = {
+export const authOptions: AuthOptions = {
   // Configure one or more authentication providers
+  adapter: PrismaAdapter(prisma3),
   providers: [
     GoogleProvider({
       clientId:
@@ -43,33 +31,25 @@ export const authOptions = {
 
     // ...add more providers here
   ],
-
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
 
-    session: async ({
-      session,
-      token,
-      user,
-      ...rest
-    }: {
-      session: any;
-      token: any;
-      user: any;
-    }) => {
-      console.log("Callback session 123", session, user)
-      if (session?.user) {
-        const account = await getUserAccount(session.user.id);
-        session.user.accountId = account._id
-        session.user.id = user.id;
-        session.user.test = "jslkdjfll"
-      }
-      return session;
+      return true
     },
-
+    async session({ session, user, token }: {
+      session: any
+      user: User,
+      token: any
+    }) {
+      if (session) {
+        session.user.id = user.id
+        session.user.token = token
+      }
+      return session
+    },
   },
-  event: {},
-  adapter: MongoDBAdapter(clientPromise),
-  secret: "giathuan",
+  // adapter: MongoDBAdapter(clientPromise),
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);
